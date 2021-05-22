@@ -20,10 +20,6 @@ public final class BloodTotem extends SlimefunItem implements Listener {
 
     public BloodTotem(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
-    }
-
-    @Override
-    public void preRegister() {
         BloodHarvest.inst().registerListener(this);
     }
 

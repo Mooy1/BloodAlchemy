@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blocks.altar.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;

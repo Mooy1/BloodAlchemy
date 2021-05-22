@@ -7,9 +7,10 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blocks.altar.BloodAltar;
-import io.github.mooy1.bloodharvest.implementation.blocks.BloodCollector;
-import io.github.mooy1.bloodharvest.implementation.blocks.altar.InfusedBloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodHopper;
+import io.github.mooy1.bloodharvest.implementation.blocks.InfusedBloodAltar;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -20,6 +21,13 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 @UtilityClass
 public final class Blocks {
+
+    public static final SlimefunItemStack ALCHEMY_CAULDRON = new SlimefunItemStack(
+            "ALCHEMY_CAULDRON",
+            Material.CAULDRON,
+            "&5Alchemy Cauldron",
+            "&7Used to combine blood and essence into powerful potions"
+    );
 
     public static final SlimefunItemStack BLOOD_ALTAR = new SlimefunItemStack(
             "BLOOD_ALTAR",
@@ -35,22 +43,20 @@ public final class Blocks {
             "&7Used to automatically create and infuse items with blood"
     );
 
-    public static final SlimefunItemStack BLOOD_COLLECTOR = new SlimefunItemStack(
-            "BLOOD_COLLECTOR",
-            Material.CAULDRON,
-            "&cBlood Collector",
+    public static final SlimefunItemStack BLOOD_HOPPER = new SlimefunItemStack(
+            "BLOOD_HOPPER",
+            Material.HOPPER,
+            "&cBlood Hopper",
             "&7Collects blood from dying creatures above",
-            "&7Automatically outputs blood to inventories below",
             "",
             LorePreset.speed(1)
     );
 
-    public static final SlimefunItemStack INFUSED_BLOOD_COLLECTOR = new SlimefunItemStack(
-            "INFUSED_BLOOD_COLLECTOR",
-            Material.CAULDRON,
-            "&cBlood Collector",
+    public static final SlimefunItemStack INFUSED_BLOOD_HOPPER = new SlimefunItemStack(
+            "INFUSED_BLOOD_HOPPER",
+            Material.HOPPER,
+            "&cBlood Hopper",
             "&7Collects blood from dying creatures above",
-            "&7Automatically outputs blood to inventories below",
             "",
             LorePreset.speed(8)
     );
@@ -65,13 +71,17 @@ public final class Blocks {
 
         }).register(plugin);
 
-        new BloodCollector(category, BLOOD_COLLECTOR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+        new BloodHopper(category, BLOOD_HOPPER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
         }, 1).register(plugin);
 
-        new BloodCollector(category, INFUSED_BLOOD_COLLECTOR, BloodAltar.TYPE, new ItemStack[] {
+        new BloodHopper(category, INFUSED_BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
 
         }, 8).register(plugin);
+
+        new AlchemyCauldron(category, ALCHEMY_CAULDRON, BloodAltar.TYPE, new ItemStack[] {
+
+        }).register(plugin);
     }
 
 }

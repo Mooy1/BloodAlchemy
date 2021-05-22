@@ -24,6 +24,7 @@ public final class BloodHarvest extends AbstractAddon {
     public void onEnable() {
         instance = this;
 
+        // All the stuff every addon does is taken care of in AbstractAddon#onEnable
         super.onEnable();
 
         Category category = new Category(getKey("blood_harvest"),
@@ -42,7 +43,7 @@ public final class BloodHarvest extends AbstractAddon {
     @Nonnull
     @Override
     protected String getGithubPath() {
-        return "Mooy1/BloodArcana/master";
+        return "Mooy1/BloodHarvest/master";
     }
 
     @Override

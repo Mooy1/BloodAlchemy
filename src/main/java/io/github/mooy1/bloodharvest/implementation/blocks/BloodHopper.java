@@ -2,6 +2,7 @@ package io.github.mooy1.bloodharvest.implementation.blocks;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
@@ -12,10 +13,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.Blocks;
 import io.github.mooy1.bloodharvest.implementation.Items;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
-import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -24,21 +23,15 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
 /**
- * A block which collects blood from dying entities up to 2 blocks above and deposits it to inventories below
+ * A hopper which collects blood from dying entities up to 2 blocks above
  */
-public final class BloodCollector extends SlimefunItem implements Listener {
-
-    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("blood_collector"), Blocks.BLOOD_COLLECTOR);
+public final class BloodHopper extends SlimefunItem implements Listener {
 
     private final int speed;
 
-    public BloodCollector(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int speed) {
+    public BloodHopper(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int speed) {
         super(category, item, recipeType, recipe);
         this.speed = speed;
-    }
-
-    @Override
-    public void preRegister() {
         BloodHarvest.inst().registerListener(this);
     }
 
@@ -54,26 +47,11 @@ public final class BloodCollector extends SlimefunItem implements Listener {
     }
 
     private void addBlood(Block b) {
-        // TODO particles and sounds?
-
-        switch (b.getType()) {
-            case CHEST:
-            case TRAPPED_CHEST:
-            case BARREL:
-            case HOPPER:
-            case DISPENSER:
-            case DROPPER:
-                break;
-            default:
-                if (!SlimefunTag.SHULKER_BOXES.isTagged(b.getType())) {
-                    return;
-                }
-        }
-
-        BlockState state = PaperLib.getBlockState(b, false).getState();
-
-        if (state instanceof InventoryHolder) {
-            ((InventoryHolder) state).getInventory().addItem(new CustomItem(Items.BLOOD, this.speed));
+        if (b.getType() == Material.HOPPER) {
+            BlockState state = PaperLib.getBlockState(b, false).getState();
+            if (state instanceof InventoryHolder) {
+                ((InventoryHolder) state).getInventory().addItem(new CustomItem(Items.BLOOD, this.speed));
+            }
         }
     }
 

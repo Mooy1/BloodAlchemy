@@ -3,11 +3,15 @@ package io.github.mooy1.bloodharvest.implementation;
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blocks.altar.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -19,6 +23,11 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
  */
 @UtilityClass
 public final class Items {
+
+    public static final SlimefunItemStack DEMON_POTION = AlchemyCauldron.createPotion(Color.RED, "&4Demon",
+            new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1),
+            new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1)
+    );
 
     public static final SlimefunItemStack GROWTH_ESSENCE = new SlimefunItemStack(
             "GROWTH_ESSENCE",
@@ -73,6 +82,9 @@ public final class Items {
                 BLOOD, DEEP_ESSENCE, GROWTH_ESSENCE, HARVEST_ESSENCE, TERRA_ESSENCE
         }).register(plugin);
 
+        new SlimefunItem(category, DEMON_POTION, AlchemyCauldron.TYPE, new ItemStack[] {
+
+        });
     }
 
 
