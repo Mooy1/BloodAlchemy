@@ -1,14 +1,14 @@
-name: AddonTemplate
+name: BloodArcana
 author: Mooy1
-description: Addon Template
-main: io.github.mooy1.addontemplate.AddonTemplate
-website: https://github.com/Mooy1/AddonTemplate
+description: My entry for the 2021 Addon Jam
+main: io.github.mooy1.bloodarcana.BloodArcana
+website: https://github.com/Mooy1/BloodArcana
 depend: [Slimefun]
 version: ${project.version}
 api-version: 1.16
 
 commands:
   addontemplate:
-    description: Do /addontemplate help for a list of commands
-    usage: /addontemplate <subcommand>
-    aliases: [at]
+    description: Do /bloodarcana help for a list of commands
+    usage: /bloodarcana <subcommand>
+    aliases: [ba]

@@ -1,25 +1,26 @@
-package io.github.mooy1.addontemplate;
+package io.github.mooy1.bloodarcana;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Nonnull;
 
+import io.github.mooy1.bloodarcana.implementation.Items;
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
-import io.github.mooy1.infinitylib.commands.AbstractCommand;
 
-public final class AddonTemplate extends AbstractAddon {
+public final class BloodArcana extends AbstractAddon {
     
-    private static AddonTemplate instance;
+    private static BloodArcana instance;
     
-    public static AddonTemplate inst() {
+    public static BloodArcana inst() {
         return instance;
     }
     
     @Override
     public void onEnable() {
         instance = this;
+
         super.onEnable();
+
+        Items.setup(this);
     }
 
     @Override
@@ -30,13 +31,7 @@ public final class AddonTemplate extends AbstractAddon {
     @Nonnull
     @Override
     protected String getGithubPath() {
-        return "Mooy1/AddonTemplate/master";
-    }
-
-    @Nonnull
-    @Override
-    protected List<AbstractCommand> getSubCommands() {
-        return new ArrayList<>();
+        return "Mooy1/BloodArcana/master";
     }
 
     @Override
