@@ -7,138 +7,73 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blood.altar.BloodAltar;
-import io.github.mooy1.bloodharvest.implementation.blood.BloodCollector;
-import io.github.mooy1.bloodharvest.implementation.blood.BloodPurifier;
-import io.github.mooy1.bloodharvest.implementation.items.SacrificialDagger;
-import io.github.mooy1.infinitylib.presets.LorePreset;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import io.github.mooy1.bloodharvest.implementation.blocks.altar.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
+/**
+ * Items added in this addon
+ */
 @UtilityClass
 public final class Items {
 
-    public static final SlimefunItemStack IMPURE_BLOOD = new SlimefunItemStack(
-            "IMPURE_BLOOD",
-            Material.NETHER_WART,
-            "&cImpure Blood",
-            "&7Must be purified to be used in arcana"
+    public static final SlimefunItemStack GROWTH_ESSENCE = new SlimefunItemStack(
+            "GROWTH_ESSENCE",
+            Material.LIME_DYE,
+            "&aGrowth Essence",
+            "&7The essence of a growing organism"
     );
 
-    public static final SlimefunItemStack PURIFIED_BLOOD = new SlimefunItemStack(
-            "PURIFIED_BLOOD",
+    public static final SlimefunItemStack HARVEST_ESSENCE = new SlimefunItemStack(
+            "HARVEST_ESSENCE",
+            Material.YELLOW_DYE,
+            "&eHarvest Essence",
+            "&7The essence of a harvested plant"
+    );
+
+    public static final SlimefunItemStack TERRA_ESSENCE = new SlimefunItemStack(
+            "TERRA_ESSENCE",
+            Material.BROWN_DYE,
+            "&6Terra Essence",
+            "&7The essence of the earth"
+    );
+
+    public static final SlimefunItemStack DEEP_ESSENCE = new SlimefunItemStack(
+            "TERRA_ESSENCE",
+            Material.GRAY_DYE,
+            "&8Deep Essence",
+            "&7The essence of the deep"
+    );
+
+    public static final SlimefunItemStack BLOOD = new SlimefunItemStack(
+            "BLOOD",
             Material.RED_DYE,
-            "&4Purified Blood",
-            "&7Gleaming with power for use in arcana"
+            "&cBlood",
+            "&7Gleaming with potential power"
     );
 
-    public static final SlimefunItemStack BLOOD_ALTAR = new SlimefunItemStack(
-            "BLOOD_ALTAR",
-            Material.ENCHANTING_TABLE,
-            "&cBlood Altar",
-            "&7Used to create and infuse items with blood",
-            "",
-            LorePreset.speed(1)
+    public static final SlimefunItemStack INFUSED_BLOOD = new SlimefunItemStack(
+            "INFUSED_BLOOD",
+            Material.RED_DYE,
+            "&cInfused Blood",
+            "&7Gleaming with power, infused with essence"
     );
 
-    public static final SlimefunItemStack INFUSED_BLOOD_ALTAR = new SlimefunItemStack(
-            "INFUSED_BLOOD_ALTAR",
-            Material.ENCHANTING_TABLE,
-            "&cInfused Blood Altar",
-            "&7Used to create and infuse items with blood",
-            "",
-            LorePreset.speed(8)
-    );
-
-    public static final SlimefunItemStack BLOOD_COLLECTOR = new SlimefunItemStack(
-            "BLOOD_COLLECTOR",
-            Material.CAULDRON,
-            "&cBlood Collector",
-            "&7Collects impure blood from dying creatures above",
-            "&7Automatically outputs blood to inventories below",
-            "",
-            LorePreset.speed(1)
-    );
-
-    public static final SlimefunItemStack INFUSED_BLOOD_COLLECTOR = new SlimefunItemStack(
-            "INFUSED_BLOOD_COLLECTOR",
-            Material.CAULDRON,
-            "&cBlood Collector",
-            "&7Collects impure blood from dying creatures above",
-            "&7Automatically outputs blood to inventories below",
-            "",
-            LorePreset.speed(8)
-    );
-
-    public static final SlimefunItemStack SACRIFICIAL_DAGGER = new SlimefunItemStack(
-            "SACRIFICIAL_DAGGER",
-            Material.IRON_SWORD,
-            "&fSacrificial Dagger",
-            "&7Collects impure blood from killing creatures",
-            "&7Right-Click to stab yourself for impure blood"
-    );
-
-    public static final SlimefunItemStack BLOOD_PURIFIER = new SlimefunItemStack(
-            "BLOOD_PURIFIER",
-            Material.NETHER_BRICKS,
-            "&4Blood Purifier",
-            "&7Purifies impure blood",
-            "",
-            LorePreset.speed(1)
-    );
-
-    public static final SlimefunItemStack INFUSED_BLOOD_PURIFIER = new SlimefunItemStack(
-            "INFUSED_BLOOD_PURIFIER",
-            Material.NETHER_BRICKS,
-            "&4Infused Blood Purifier",
-            "&7Purifies impure blood",
-            "",
-            LorePreset.speed(8)
-    );
-
-    public static void setup(@Nonnull BloodHarvest plugin) {
-
-        Category category = new Category(plugin.getKey("blood_arcana"),
-                new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Arcana"));
-
-        new SlimefunItem(category, IMPURE_BLOOD, BloodCollector.TYPE, new ItemStack[] {
-
+    public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
+        new SlimefunItem(category, BLOOD, SacrificialDagger.TYPE, new ItemStack[] {
+                null, null, null,
+                null, new CustomItem(Material.ZOMBIE_HEAD, "&7Any Mob"), null,
+                null, null, null
         }).register(plugin);
 
-        new SlimefunItem(category, PURIFIED_BLOOD, BloodPurifier.TYPE, new ItemStack[] {
-
+        new SlimefunItem(category, INFUSED_BLOOD, BloodAltar.TYPE, new ItemStack[] {
+                BLOOD, DEEP_ESSENCE, GROWTH_ESSENCE, HARVEST_ESSENCE, TERRA_ESSENCE
         }).register(plugin);
 
-        new BloodAltar(category, BLOOD_ALTAR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-
-        }, 1).register(plugin);
-
-        new BloodAltar(category, INFUSED_BLOOD_ALTAR, BloodAltar.TYPE, new ItemStack[] {
-
-        }, 8).register(plugin);
-
-        new BloodCollector(category, BLOOD_COLLECTOR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-
-        }, 1).register(plugin);
-
-        new BloodCollector(category, INFUSED_BLOOD_COLLECTOR, BloodAltar.TYPE, new ItemStack[] {
-
-        }, 8).register(plugin);
-
-        new BloodPurifier(category, BLOOD_PURIFIER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-
-        }).register(plugin);
-
-        new BloodPurifier(category, INFUSED_BLOOD_PURIFIER, BloodAltar.TYPE, new ItemStack[] {
-
-        }).register(plugin);
-
-        new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-
-        }).register(plugin);
     }
+
 
 }

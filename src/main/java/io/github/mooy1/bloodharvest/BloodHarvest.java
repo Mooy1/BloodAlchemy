@@ -2,9 +2,15 @@ package io.github.mooy1.bloodharvest;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.Material;
+
+import io.github.mooy1.bloodharvest.implementation.Blocks;
 import io.github.mooy1.bloodharvest.implementation.Items;
+import io.github.mooy1.bloodharvest.implementation.Tools;
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
+import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
 public final class BloodHarvest extends AbstractAddon {
     
@@ -20,7 +26,12 @@ public final class BloodHarvest extends AbstractAddon {
 
         super.onEnable();
 
-        Items.setup(this);
+        Category category = new Category(getKey("blood_harvest"),
+                new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Harvest"));
+
+        Items.setup(this, category);
+        Blocks.setup(this, category);
+        Tools.setup(this, category);
     }
 
     @Override

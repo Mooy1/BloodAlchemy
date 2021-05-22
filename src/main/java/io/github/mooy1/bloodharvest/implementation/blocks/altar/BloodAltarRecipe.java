@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blood.altar;
+package io.github.mooy1.bloodharvest.implementation.blocks.altar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,12 @@ import org.bukkit.inventory.ItemStack;
  * A recipe in the {@link BloodAltar} with an output
  */
 @Getter
-final class BloodRecipe extends BloodInput {
+final class BloodAltarRecipe extends BloodAltarInput {
 
     private final List<ItemStack> inputs = new ArrayList<>();
     private final ItemStack output;
 
-    BloodRecipe(ItemStack[] recipe, ItemStack output) {
+    BloodAltarRecipe(ItemStack[] recipe, ItemStack output) {
         super(recipe);
         for (ItemStack item : recipe) {
             if (item != null) {

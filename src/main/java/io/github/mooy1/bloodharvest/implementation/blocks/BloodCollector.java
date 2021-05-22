@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blood;
+package io.github.mooy1.bloodharvest.implementation.blocks;
 
 import javax.annotation.Nonnull;
 
@@ -12,6 +12,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodharvest.implementation.Blocks;
 import io.github.mooy1.bloodharvest.implementation.Items;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
@@ -22,9 +23,12 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
+/**
+ * A block which collects blood from dying entities up to 2 blocks above and deposits it to inventories below
+ */
 public final class BloodCollector extends SlimefunItem implements Listener {
 
-    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("blood_collector"), Items.BLOOD_COLLECTOR);
+    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("blood_collector"), Blocks.BLOOD_COLLECTOR);
 
     private final int speed;
 
@@ -69,7 +73,7 @@ public final class BloodCollector extends SlimefunItem implements Listener {
         BlockState state = PaperLib.getBlockState(b, false).getState();
 
         if (state instanceof InventoryHolder) {
-            ((InventoryHolder) state).getInventory().addItem(new CustomItem(Items.IMPURE_BLOOD, this.speed));
+            ((InventoryHolder) state).getInventory().addItem(new CustomItem(Items.BLOOD, this.speed));
         }
     }
 
