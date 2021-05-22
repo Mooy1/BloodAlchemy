@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a Bug or an Issue with Slimefun 4.
+about: Report a Bug or an Issue with this Addon.
 title: ''
 labels: ''
 assignees: ''

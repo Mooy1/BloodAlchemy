@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodarcana.implementation.blocks.altar;
+package io.github.mooy1.bloodharvest.implementation.blood.altar;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

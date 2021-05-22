@@ -1,16 +1,16 @@
-package io.github.mooy1.bloodarcana;
+package io.github.mooy1.bloodharvest;
 
 import javax.annotation.Nonnull;
 
-import io.github.mooy1.bloodarcana.implementation.Items;
+import io.github.mooy1.bloodharvest.implementation.Items;
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
 
-public final class BloodArcana extends AbstractAddon {
+public final class BloodHarvest extends AbstractAddon {
     
-    private static BloodArcana instance;
+    private static BloodHarvest instance;
     
-    public static BloodArcana inst() {
+    public static BloodHarvest inst() {
         return instance;
     }
     

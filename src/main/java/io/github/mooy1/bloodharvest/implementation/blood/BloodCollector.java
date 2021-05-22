@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodarcana.implementation.blocks;
+package io.github.mooy1.bloodharvest.implementation.blood;
 
 import javax.annotation.Nonnull;
 
@@ -11,8 +11,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodarcana.BloodArcana;
-import io.github.mooy1.bloodarcana.implementation.Items;
+import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodharvest.implementation.Items;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -24,7 +24,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
 public final class BloodCollector extends SlimefunItem implements Listener {
 
-    public static final RecipeType TYPE = new RecipeType(BloodArcana.inst().getKey("blood_collector"), Items.BLOOD_COLLECTOR);
+    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("blood_collector"), Items.BLOOD_COLLECTOR);
 
     private final int speed;
 
@@ -35,7 +35,7 @@ public final class BloodCollector extends SlimefunItem implements Listener {
 
     @Override
     public void preRegister() {
-        BloodArcana.inst().registerListener(this);
+        BloodHarvest.inst().registerListener(this);
     }
 
     @EventHandler

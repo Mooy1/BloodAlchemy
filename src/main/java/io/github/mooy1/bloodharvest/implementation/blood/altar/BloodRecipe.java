@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodarcana.implementation.blocks.altar;
+package io.github.mooy1.bloodharvest.implementation.blood.altar;
 
 import java.util.ArrayList;
 import java.util.List;

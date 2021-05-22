@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodarcana.implementation;
+package io.github.mooy1.bloodharvest.implementation;
 
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
@@ -6,11 +6,11 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodarcana.BloodArcana;
-import io.github.mooy1.bloodarcana.implementation.blocks.altar.BloodAltar;
-import io.github.mooy1.bloodarcana.implementation.blocks.BloodCollector;
-import io.github.mooy1.bloodarcana.implementation.blocks.BloodPurifier;
-import io.github.mooy1.bloodarcana.implementation.items.SacrificialDagger;
+import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodharvest.implementation.blood.altar.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blood.BloodCollector;
+import io.github.mooy1.bloodharvest.implementation.blood.BloodPurifier;
+import io.github.mooy1.bloodharvest.implementation.items.SacrificialDagger;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -99,7 +99,8 @@ public final class Items {
             LorePreset.speed(8)
     );
 
-    public static void setup(@Nonnull BloodArcana plugin) {
+    public static void setup(@Nonnull BloodHarvest plugin) {
+
         Category category = new Category(plugin.getKey("blood_arcana"),
                 new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Arcana"));
 

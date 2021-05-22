@@ -1,14 +1,14 @@
-name: BloodArcana
+name: BloodHarvest
 author: Mooy1
 description: My entry for the 2021 Addon Jam
-main: io.github.mooy1.bloodarcana.BloodArcana
-website: https://github.com/Mooy1/BloodArcana
+main: io.github.mooy1.bloodharvest.BloodHarvest
+website: https://github.com/Mooy1/BloodHarvest
 depend: [Slimefun]
 version: ${project.version}
 api-version: 1.16
 
 commands:
   addontemplate:
-    description: Do /bloodarcana help for a list of commands
-    usage: /bloodarcana <subcommand>
-    aliases: [ba]
+    description: Do /bloodharvest help for a list of commands
+    usage: /bloodharvest <subcommand>
+    aliases: [bh]

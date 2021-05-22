@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mooy1</groupId>
-    <artifactId>BloodArcana</artifactId>
+    <artifactId>BloodHarvest</artifactId>
     <version>ALPHA</version>
 
     <properties>
@@ -87,7 +87,7 @@
                     <relocations>
                         <relocation>
                             <pattern>io.github.mooy1.infinitylib</pattern>
-                            <shadedPattern>io.github.mooy1.bloodarcana.infinitylib</shadedPattern>
+                            <shadedPattern>io.github.mooy1.bloodharvest.infinitylib</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>

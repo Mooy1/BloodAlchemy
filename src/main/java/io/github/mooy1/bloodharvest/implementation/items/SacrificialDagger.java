@@ -1,11 +1,11 @@
-package io.github.mooy1.bloodarcana.implementation.items;
+package io.github.mooy1.bloodharvest.implementation.items;
 
 import javax.annotation.Nonnull;
 
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodarcana.implementation.Items;
+import io.github.mooy1.bloodharvest.implementation.Items;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;

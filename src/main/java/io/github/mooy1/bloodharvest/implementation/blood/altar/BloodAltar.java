@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodarcana.implementation.blocks.altar;
+package io.github.mooy1.bloodharvest.implementation.blood.altar;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +14,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodarcana.BloodArcana;
-import io.github.mooy1.bloodarcana.implementation.Items;
+import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodharvest.implementation.Items;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
@@ -30,7 +30,7 @@ public final class BloodAltar extends SlimefunItem {
 
     private static final Map<BloodInput, BloodRecipe> RECIPES = new HashMap<>();
 
-    public static final RecipeType TYPE = new RecipeType(BloodArcana.inst().getKey("blood_altar"),
+    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("blood_altar"),
             Items.BLOOD_ALTAR, (itemStacks, itemStack) -> {
         BloodRecipe recipe = new BloodRecipe(itemStacks, itemStack);
         /*
