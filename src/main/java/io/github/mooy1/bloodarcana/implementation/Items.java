@@ -6,9 +6,10 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodarcana.BloodArcana;
-import io.github.mooy1.bloodarcana.implementation.blocks.BloodAltar;
+import io.github.mooy1.bloodarcana.implementation.blocks.altar.BloodAltar;
 import io.github.mooy1.bloodarcana.implementation.blocks.BloodCollector;
 import io.github.mooy1.bloodarcana.implementation.blocks.BloodPurifier;
+import io.github.mooy1.bloodarcana.implementation.items.SacrificialDagger;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -111,11 +112,11 @@ public final class Items {
 
         new BloodAltar(category, BLOOD_ALTAR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
-        }).register(plugin);
+        }, 1).register(plugin);
 
         new BloodAltar(category, INFUSED_BLOOD_ALTAR, BloodAltar.TYPE, new ItemStack[] {
 
-        }).register(plugin);
+        }, 8).register(plugin);
 
         new BloodCollector(category, BLOOD_COLLECTOR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
@@ -130,6 +131,10 @@ public final class Items {
         }).register(plugin);
 
         new BloodPurifier(category, INFUSED_BLOOD_PURIFIER, BloodAltar.TYPE, new ItemStack[] {
+
+        }).register(plugin);
+
+        new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
         }).register(plugin);
     }

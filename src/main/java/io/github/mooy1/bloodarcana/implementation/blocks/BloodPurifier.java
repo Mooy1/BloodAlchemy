@@ -11,7 +11,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public final class BloodPurifier extends SlimefunItem {
 
-    public static final RecipeType TYPE = new RecipeType(BloodArcana.inst().getKey("blood_purifier"), Items.);
+    public static final RecipeType TYPE = new RecipeType(BloodArcana.inst().getKey("blood_purifier"), Items.BLOOD_PURIFIER);
 
     public BloodPurifier(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
