@@ -5,8 +5,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mooy1</groupId>
-    <artifactId>AddonTemplate</artifactId>
-    <version>MODIFIED</version>
+    <artifactId>BloodArcana</artifactId>
+    <version>ALPHA</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

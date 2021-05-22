@@ -1,5 +1,6 @@
 package io.github.mooy1.bloodarcana.implementation;
 
+import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
 import org.bukkit.Material;
@@ -98,7 +99,7 @@ public final class Items {
             LorePreset.speed(8)
     );
 
-    public static void setup(BloodArcana plugin) {
+    public static void setup(@Nonnull BloodArcana plugin) {
         Category category = new Category(plugin.getKey("blood_arcana"),
                 new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Arcana"));
 
@@ -120,11 +121,11 @@ public final class Items {
 
         new BloodCollector(category, BLOOD_COLLECTOR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
-        }).register(plugin);
+        }, 1).register(plugin);
 
         new BloodCollector(category, INFUSED_BLOOD_COLLECTOR, BloodAltar.TYPE, new ItemStack[] {
 
-        }).register(plugin);
+        }, 8).register(plugin);
 
         new BloodPurifier(category, BLOOD_PURIFIER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
