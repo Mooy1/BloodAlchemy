@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks;
+package io.github.mooy1.bloodharvest.core.blocks;
 
 import javax.annotation.Nonnull;
 

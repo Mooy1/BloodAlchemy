@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks;
+package io.github.mooy1.bloodharvest.core.blocks;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
 import io.github.mooy1.bloodharvest.implementation.Blocks;
-import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AbstractAlchemyCrafter;
-import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyInput;
-import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyRecipe;
+import io.github.mooy1.bloodharvest.core.blocks.alchemy.AbstractAlchemyCrafter;
+import io.github.mooy1.bloodharvest.core.blocks.alchemy.AlchemyInput;
+import io.github.mooy1.bloodharvest.core.blocks.alchemy.AlchemyRecipe;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;

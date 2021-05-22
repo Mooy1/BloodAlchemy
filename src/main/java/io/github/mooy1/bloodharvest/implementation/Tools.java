@@ -7,10 +7,11 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
-import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
-import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
-import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;
+import io.github.mooy1.bloodharvest.core.blocks.BloodAltar;
+import io.github.mooy1.bloodharvest.core.tools.BloodTotem;
+import io.github.mooy1.bloodharvest.core.tools.EssenceTalisman;
+import io.github.mooy1.bloodharvest.core.tools.SacrificialDagger;
+import io.github.mooy1.bloodharvest.core.tools.VampireBlade;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -45,6 +46,15 @@ public final class Tools {
             "&7Becomes more powerful as you feed it blood"
     );
 
+    public static final SlimefunItemStack ESSENCE_TALISMAN = new SlimefunItemStack(
+            "ESSENCE_TALISMAN",
+            Material.EMERALD,
+            "&aEssence Talisman",
+            "&7Allows you to collect essence from natural blocks in the world",
+            "",
+            EssenceTalisman.getChanceLore(1, 0)
+    );
+
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
 
         new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
@@ -56,6 +66,10 @@ public final class Tools {
         }).register(plugin);
 
         new BloodTotem(category, BLOOD_TOTEM, BloodAltar.TYPE, new ItemStack[] {
+
+        });
+
+        new EssenceTalisman(category, ESSENCE_TALISMAN, BloodAltar.TYPE, new ItemStack[] {
 
         });
 

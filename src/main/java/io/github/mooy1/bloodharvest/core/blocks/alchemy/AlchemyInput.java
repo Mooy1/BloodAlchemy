@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
+package io.github.mooy1.bloodharvest.core.blocks.alchemy;
 
 import java.util.HashMap;
 import java.util.Map;
