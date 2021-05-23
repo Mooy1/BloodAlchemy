@@ -10,7 +10,6 @@ import io.github.mooy1.bloodharvest.BloodHarvest;
 import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
 import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodharvest.implementation.blocks.BloodHopper;
-import io.github.mooy1.bloodharvest.implementation.blocks.InfusedBloodAltar;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -64,10 +63,6 @@ public final class Blocks {
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
 
         new BloodAltar(category, BLOOD_ALTAR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-
-        }).register(plugin);
-
-        new InfusedBloodAltar(category, INFUSED_BLOOD_ALTAR, BloodAltar.TYPE, new ItemStack[] {
 
         }).register(plugin);
 

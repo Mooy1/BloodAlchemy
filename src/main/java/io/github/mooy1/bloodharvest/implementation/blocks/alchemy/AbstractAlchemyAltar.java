@@ -107,6 +107,7 @@ public abstract class AbstractAlchemyAltar extends SlimefunItem {
 
                 if (recipe != null) {
                     consumeRecipe(inputs, nearby, recipe);
+                    onCraftStart(b.getLocation());
                     return new AlchemyProcess(recipe);
                 }
 
@@ -157,6 +158,8 @@ public abstract class AbstractAlchemyAltar extends SlimefunItem {
      * @return The radius to check for items in
      */
     protected abstract double getItemRadius();
+
+    protected abstract void onCraftStart(Location l);
 
     protected abstract void onCraftProcess(Location l);
 

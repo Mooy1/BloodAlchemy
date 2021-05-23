@@ -24,7 +24,7 @@ public final class BloodHarvest extends AbstractAddon {
     public void onEnable() {
         instance = this;
 
-        // All the stuff every addon does is taken care of in AbstractAddon#onEnable
+        // All of the config and auto update stuff is taken care of in AbstractAddon#onEnable
         super.onEnable();
 
         Category category = new Category(getKey("blood_harvest"),
@@ -36,19 +36,19 @@ public final class BloodHarvest extends AbstractAddon {
     }
 
     @Override
+    public void onDisable() {
+        instance = null;
+    }
+
+    @Override
     protected Metrics setupMetrics() {
-        return null;
+        return new Metrics(this, 11453);
     }
 
     @Nonnull
     @Override
     protected String getGithubPath() {
         return "Mooy1/BloodHarvest/master";
-    }
-
-    @Override
-    public void onDisable() {
-        instance = null;
     }
     
 }

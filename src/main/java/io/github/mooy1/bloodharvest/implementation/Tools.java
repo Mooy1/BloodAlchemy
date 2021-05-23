@@ -3,17 +3,21 @@ package io.github.mooy1.bloodharvest.implementation;
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
 import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
-import io.github.mooy1.bloodharvest.implementation.tools.EssenceTalisman;
 import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
@@ -21,6 +25,14 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 @UtilityClass
 public final class Tools {
+
+    public static final SlimefunItemStack TEST_POTION = AlchemyCauldron.createPotion(
+            Color.RED,
+            "&4Test",
+            "&7testing",
+            new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1),
+            new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1)
+    );
 
     public static final SlimefunItemStack SACRIFICIAL_DAGGER = new SlimefunItemStack(
             "SACRIFICIAL_DAGGER",
@@ -46,15 +58,6 @@ public final class Tools {
             "&7Becomes more powerful as you feed it blood"
     );
 
-    public static final SlimefunItemStack ESSENCE_TALISMAN = new SlimefunItemStack(
-            "ESSENCE_TALISMAN",
-            Material.EMERALD,
-            "&aEssence Talisman",
-            "&7Allows you to collect essence from natural blocks in the world",
-            "",
-            EssenceTalisman.getChanceLore(1, 0)
-    );
-
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
 
         new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
@@ -67,11 +70,11 @@ public final class Tools {
 
         new BloodTotem(category, BLOOD_TOTEM, BloodAltar.TYPE, new ItemStack[] {
 
-        });
+        }).register(plugin);
 
-        new EssenceTalisman(category, ESSENCE_TALISMAN, BloodAltar.TYPE, new ItemStack[] {
+        new SlimefunItem(category, TEST_POTION, AlchemyCauldron.TYPE, new ItemStack[] {
 
-        });
+        }).register(plugin);
 
     }
 

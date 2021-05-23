@@ -18,7 +18,7 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
- * An altar at which players will sacrifice blood and items to create and infuse items.
+ * An altar at which players will sacrifice blood and items to create and infuse more powerful items.
  */
 public final class BloodAltar extends AbstractAlchemyAltar {
 
@@ -46,6 +46,11 @@ public final class BloodAltar extends AbstractAlchemyAltar {
     @Override
     protected double getItemRadius() {
         return 2;
+    }
+
+    @Override
+    protected void onCraftStart(Location l) {
+
     }
 
     @Override

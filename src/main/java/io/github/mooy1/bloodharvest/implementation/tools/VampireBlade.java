@@ -12,4 +12,5 @@ public final class VampireBlade extends SlimefunItem {
     public VampireBlade(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }
+
 }

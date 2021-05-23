@@ -29,8 +29,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
             return;
         }
 
-        Player p = (Player) e.getEntity();
-        PlayerInventory inv = p.getInventory();
+        PlayerInventory inv = ((Player) e.getEntity()).getInventory();
 
         ItemStack totem = inv.getItemInMainHand();
         int slot = inv.getHeldItemSlot();
@@ -46,6 +45,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
             }
         }
 
+        // TODO noises and buffs and blood
         e.setCancelled(true);
 
         // Re add the totem after they revive

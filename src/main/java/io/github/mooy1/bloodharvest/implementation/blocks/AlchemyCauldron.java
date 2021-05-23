@@ -1,12 +1,20 @@
 package io.github.mooy1.bloodharvest.implementation.blocks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
 import io.github.mooy1.bloodharvest.implementation.Blocks;
@@ -16,6 +24,7 @@ import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyRecipe;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
 
 /**
  * A cauldron which is able to brew special potions
@@ -48,6 +57,11 @@ public final class AlchemyCauldron extends AbstractAlchemyAltar {
     }
 
     @Override
+    protected void onCraftStart(Location l) {
+
+    }
+
+    @Override
     protected void onCraftProcess(Location l) {
 
     }
@@ -55,6 +69,30 @@ public final class AlchemyCauldron extends AbstractAlchemyAltar {
     @Override
     protected void onCraftFinish(Location l) {
 
+    }
+
+    /**
+     * Creates a potion to be crafted in this
+     */
+    @Nonnull
+    public static SlimefunItemStack createPotion(Color color, String name, String description, PotionEffect... effects) {
+        return new SlimefunItemStack(
+                ChatColor.stripColor(ChatColors.color(name)).toUpperCase(Locale.ROOT) + "_POTION",
+                Material.POTION,
+                name + " Potion",
+                meta -> {
+                    List<String> lore = new ArrayList<>();
+                    lore.add("");
+                    lore.add(description);
+                    meta.setLore(lore);
+
+                    PotionMeta potion = (PotionMeta) meta;
+                    potion.setColor(color);
+                    for (PotionEffect effect : effects) {
+                        potion.addCustomEffect(effect, true);
+                    }
+                }
+        );
     }
 
 }
