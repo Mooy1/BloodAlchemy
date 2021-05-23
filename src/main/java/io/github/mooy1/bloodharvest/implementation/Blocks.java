@@ -7,10 +7,10 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.core.blocks.AlchemyCauldron;
-import io.github.mooy1.bloodharvest.core.blocks.BloodAltar;
-import io.github.mooy1.bloodharvest.core.blocks.BloodHopper;
-import io.github.mooy1.bloodharvest.core.blocks.InfusedBloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodHopper;
+import io.github.mooy1.bloodharvest.implementation.blocks.InfusedBloodAltar;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -33,7 +33,7 @@ public final class Blocks {
             "BLOOD_ALTAR",
             Material.ENCHANTING_TABLE,
             "&cBlood Altar",
-            "&7Used to create and infuse items with blood"
+            "&7Used to create and infuse items with blood, right click to activate"
     );
 
     public static final SlimefunItemStack INFUSED_BLOOD_ALTAR = new SlimefunItemStack(

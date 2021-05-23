@@ -1,17 +1,18 @@
-package io.github.mooy1.bloodharvest.core.blocks;
+package io.github.mooy1.bloodharvest.implementation.blocks;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
 import io.github.mooy1.bloodharvest.implementation.Blocks;
-import io.github.mooy1.bloodharvest.core.blocks.alchemy.AbstractAlchemyCrafter;
-import io.github.mooy1.bloodharvest.core.blocks.alchemy.AlchemyInput;
-import io.github.mooy1.bloodharvest.core.blocks.alchemy.AlchemyRecipe;
+import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AbstractAlchemyAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyInput;
+import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyRecipe;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -19,7 +20,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 /**
  * An altar at which players will sacrifice blood and items to create and infuse items.
  */
-public final class BloodAltar extends AbstractAlchemyCrafter {
+public final class BloodAltar extends AbstractAlchemyAltar {
 
     static final Map<AlchemyInput, AlchemyRecipe> RECIPES = new HashMap<>();
 
@@ -45,6 +46,16 @@ public final class BloodAltar extends AbstractAlchemyCrafter {
     @Override
     protected double getItemRadius() {
         return 2;
+    }
+
+    @Override
+    protected void onCraftProcess(Location l) {
+
+    }
+
+    @Override
+    protected void onCraftFinish(Location l) {
+
     }
 
 }

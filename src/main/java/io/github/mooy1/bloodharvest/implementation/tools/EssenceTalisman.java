@@ -1,8 +1,9 @@
-package io.github.mooy1.bloodharvest.core.tools;
+package io.github.mooy1.bloodharvest.implementation.tools;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.bukkit.Material;
@@ -18,6 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
 import io.github.mooy1.bloodharvest.implementation.Items;
+import io.github.mooy1.bloodharvest.implementation.Tools;
 import io.github.mooy1.bloodharvest.util.Util;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
@@ -27,6 +29,8 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public final class EssenceTalisman extends SlimefunItem implements Listener {
+
+    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("essence_talisman"), Tools.ESSENCE_TALISMAN);
 
     private static final double GROWTH_BASE = 100;
     private static final double GROWTH_INCREASE = 4;
@@ -39,21 +43,20 @@ public final class EssenceTalisman extends SlimefunItem implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    private void onBreak(BlockBreakEvent e) {
-        ItemStack essence = getEssence(e.getBlock().getType());
+    private void onBreak(@Nonnull BlockBreakEvent e) {
+        ItemStack talisman = getTalisman(e.getPlayer());
 
-        if (essence != null) {
-            ItemStack talisman = getTalisman(e.getPlayer());
+        if (talisman != null) {
 
-            if (talisman != null && checkAndImproveChance(talisman)) {
+            ItemStack essence = getEssence(e.getBlock().getType());
 
-                // Drop the essence
+            if (essence != null && checkAndImproveChance(talisman)) {
                 e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), essence);
             }
         }
     }
 
-    private boolean checkAndImproveChance(ItemStack talisman) {
+    private boolean checkAndImproveChance(@Nonnull ItemStack talisman) {
         if (!talisman.hasItemMeta()) {
             return false;
         }
@@ -78,12 +81,8 @@ public final class EssenceTalisman extends SlimefunItem implements Listener {
         return ThreadLocalRandom.current().nextInt(100) < chance;
     }
 
-    public static String getChanceLore(int chance, int growth) {
-        return "&aEssence Chance: " + chance + "% (" + growth / Util.getNeededGrowth(chance, GROWTH_BASE, GROWTH_INCREASE);
-    }
-
     @Nullable
-    private ItemStack getTalisman(Player p) {
+    private ItemStack getTalisman(@Nonnull Player p) {
         for (ItemStack stack : p.getInventory().getStorageContents()) {
             if (stack == null || stack.getType() == Material.AIR) {
                 continue;
@@ -95,19 +94,28 @@ public final class EssenceTalisman extends SlimefunItem implements Listener {
         return null;
     }
 
+    @Nonnull
+    public static String getChanceLore(int chance, int growth) {
+        int needed = Util.getNeededGrowth(chance, GROWTH_BASE, GROWTH_INCREASE);
+        return "&aEssence Chance: " + chance + "% (" + growth + "/" + needed + ")";
+    }
+
     @Nullable
     private static ItemStack getEssence(Material material) {
-        if (SlimefunTag.ORES.isTagged(material) || SlimefunTag.STONE_VARIANTS.isTagged(material)) {
-            return Items.DEEP_ESSENCE;
+        if (SlimefunTag.STONE_VARIANTS.isTagged(material)) {
+            return Items.DEEP_ESSENCE.clone();
+        }
+        if (SlimefunTag.ORES.isTagged(material)) {
+            return new SlimefunItemStack(Items.DEEP_ESSENCE, 4);
         }
         if (SlimefunTag.LOGS.isTagged(material) || SlimefunTag.LEAVES.isTagged(material)) {
-            return Items.GROWTH_ESSENCE;
+            return Items.GROWTH_ESSENCE.clone();
         }
         if (SlimefunTag.CROPS.isTagged(material)) {
             return Items.HARVEST_ESSENCE;
         }
         if (SlimefunTag.DIRT_VARIANTS.isTagged(material) || SlimefunTag.SAND.isTagged(material) || material == Material.GRAVEL) {
-            return Items.TERRA_ESSENCE;
+            return Items.TERRA_ESSENCE.clone();
         }
         return null;
     }

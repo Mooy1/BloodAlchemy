@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.core.blocks;
+package io.github.mooy1.bloodharvest.implementation.blocks;
 
 import javax.annotation.Nonnull;
 
@@ -35,7 +35,7 @@ public final class InfusedBloodAltar extends AbstractContainer {
 
     @Override
     protected void setupMenu(@Nonnull BlockMenuPreset blockMenuPreset) {
-
+        blockMenuPreset.setSize(54);
     }
 
 }

@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.core.blocks.alchemy;
+package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.mooy1.infinitylib.items.StackUtils;
 
 /**
- * An input to an {@link AbstractAlchemyCrafter} to be used as a key in a map
+ * An input to an {@link AbstractAlchemyAltar} to be used as a key in a map
  */
 public class AlchemyInput {
 

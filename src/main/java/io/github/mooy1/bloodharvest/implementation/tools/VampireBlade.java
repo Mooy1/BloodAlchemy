@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.core.tools;
+package io.github.mooy1.bloodharvest.implementation.tools;
 
 import org.bukkit.inventory.ItemStack;
 

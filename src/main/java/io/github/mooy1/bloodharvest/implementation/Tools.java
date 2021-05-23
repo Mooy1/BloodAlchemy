@@ -7,11 +7,11 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.core.blocks.BloodAltar;
-import io.github.mooy1.bloodharvest.core.tools.BloodTotem;
-import io.github.mooy1.bloodharvest.core.tools.EssenceTalisman;
-import io.github.mooy1.bloodharvest.core.tools.SacrificialDagger;
-import io.github.mooy1.bloodharvest.core.tools.VampireBlade;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
+import io.github.mooy1.bloodharvest.implementation.tools.EssenceTalisman;
+import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
+import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;

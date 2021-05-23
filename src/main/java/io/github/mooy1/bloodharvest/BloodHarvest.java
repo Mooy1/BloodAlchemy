@@ -30,9 +30,9 @@ public final class BloodHarvest extends AbstractAddon {
         Category category = new Category(getKey("blood_harvest"),
                 new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Harvest"));
 
-        Items.setup(this, category);
         Blocks.setup(this, category);
         Tools.setup(this, category);
+        Items.setup(this, category);
     }
 
     @Override

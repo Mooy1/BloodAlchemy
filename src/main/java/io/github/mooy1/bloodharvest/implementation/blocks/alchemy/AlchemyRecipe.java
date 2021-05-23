@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.core.blocks.alchemy;
+package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A recipe in the {@link AbstractAlchemyCrafter} with an output
+ * A recipe in the {@link AbstractAlchemyAltar} with an output
  */
 @Getter
 public final class AlchemyRecipe extends AlchemyInput {

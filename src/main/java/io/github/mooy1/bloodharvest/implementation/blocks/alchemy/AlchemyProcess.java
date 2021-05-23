@@ -1,9 +1,9 @@
-package io.github.mooy1.bloodharvest.core.blocks.alchemy;
+package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import io.github.mooy1.bloodharvest.core.blocks.BloodAltar;
+import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 
 /**
  * An {@link AlchemyRecipe} being processed in the {@link BloodAltar}

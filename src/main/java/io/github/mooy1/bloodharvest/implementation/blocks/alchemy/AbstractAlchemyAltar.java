@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.core.blocks.alchemy;
+package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,11 +32,11 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 /**
  * An abstract item which crafts from items dropped in the world
  */
-public abstract class AbstractAlchemyCrafter extends SlimefunItem {
+public abstract class AbstractAlchemyAltar extends SlimefunItem {
 
     private final Map<Location, AlchemyProcess> processing = new HashMap<>();
 
-    public AbstractAlchemyCrafter(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public AbstractAlchemyAltar(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }
 
@@ -51,13 +51,13 @@ public abstract class AbstractAlchemyCrafter extends SlimefunItem {
 
             @Override
             public void tick(Block b, SlimefunItem item, Config data) {
-                AbstractAlchemyCrafter.this.processing.computeIfPresent(b.getLocation(), (l, process) -> {
+                AbstractAlchemyAltar.this.processing.computeIfPresent(b.getLocation(), (l, process) -> {
                     if (process.increment() >= getTicksPerCraft()) {
-                        b.getWorld().dropItemNaturally(b.getLocation(), process.getRecipe().getOutput());
-                        // TODO particles/sounds?
+                        l.getWorld().dropItemNaturally(l, process.getRecipe().getOutput());
+                        onCraftProcess(l);
                         return null;
                     } else {
-                        // TODO particles/sounds?
+                        onCraftFinish(l);
                         return process;
                     }
                 });
@@ -67,7 +67,7 @@ public abstract class AbstractAlchemyCrafter extends SlimefunItem {
 
             @Override
             public void onPlayerBreak(@Nonnull BlockBreakEvent e, @Nonnull ItemStack item, @Nonnull List<ItemStack> drops) {
-                AlchemyProcess processing = AbstractAlchemyCrafter.this.processing.remove(e.getBlock().getLocation());
+                AlchemyProcess processing = AbstractAlchemyAltar.this.processing.remove(e.getBlock().getLocation());
                 if (processing != null) {
                     // drop the recipe's inputs
                     drops.addAll(processing.getRecipe().getInputs());
@@ -85,10 +85,10 @@ public abstract class AbstractAlchemyCrafter extends SlimefunItem {
             Block b = e.getClickedBlock().get();
             Player p = e.getPlayer();
 
-            AbstractAlchemyCrafter.this.processing.compute(b.getLocation(), (l, process) -> {
+            AbstractAlchemyAltar.this.processing.compute(b.getLocation(), (l, process) -> {
                 if (process != null) {
                     String percent = LorePreset.format(100 * (double) process.getTicks() / getTicksPerCraft());
-                    p.sendMessage(ChatColor.GREEN + "Infusing... " + percent + ")%");
+                    p.sendMessage(ChatColor.GREEN + "Infusing... (" + percent + "%)");
                     return process;
                 }
 
@@ -157,6 +157,10 @@ public abstract class AbstractAlchemyCrafter extends SlimefunItem {
      * @return The radius to check for items in
      */
     protected abstract double getItemRadius();
+
+    protected abstract void onCraftProcess(Location l);
+
+    protected abstract void onCraftFinish(Location l);
 
     /**
      * Creates a callback for sub class's {@link RecipeType}

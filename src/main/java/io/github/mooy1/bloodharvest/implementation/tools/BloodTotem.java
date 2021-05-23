@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.core.tools;
+package io.github.mooy1.bloodharvest.implementation.tools;
 
 
 import org.bukkit.entity.Player;
@@ -46,7 +46,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
             }
         }
 
-        // TODO implement blood check and buffs
+        e.setCancelled(true);
 
         // Re add the totem after they revive
         int finalSlot = slot;
