@@ -42,4 +42,9 @@ public final class BloodAltar extends AbstractAlchemyCrafter {
         return 10;
     }
 
+    @Override
+    protected double getItemRadius() {
+        return 2;
+    }
+
 }

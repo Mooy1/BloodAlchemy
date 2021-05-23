@@ -10,13 +10,18 @@ import javax.annotation.Nonnull;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.mooy1.infinitylib.items.StackUtils;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
+import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -78,16 +83,63 @@ public abstract class AbstractAlchemyCrafter extends SlimefunItem {
             e.setUseItem(Event.Result.DENY);
 
             Block b = e.getClickedBlock().get();
+            Player p = e.getPlayer();
 
-            AlchemyProcess process = AbstractAlchemyCrafter.this.processing.get(b.getLocation());
+            AbstractAlchemyCrafter.this.processing.compute(b.getLocation(), (l, process) -> {
+                if (process != null) {
+                    String percent = LorePreset.format(100 * (double) process.getTicks() / getTicksPerCraft());
+                    p.sendMessage(ChatColor.GREEN + "Infusing... " + percent + ")%");
+                    return process;
+                }
 
-            if (process != null) {
-                double percent = 100 * (double) process.getTicks() / getTicksPerCraft();
-                e.getPlayer().sendMessage(ChatColor.GREEN + "Infusing... " + LorePreset.format(percent) + ")%");
-            } else {
-                // TODO START CRAFTING
-            }
+                double radius = getItemRadius();
+                Entity[] nearby = p.getWorld().getNearbyEntities(l, radius, radius, radius,
+                        en -> en instanceof Item).toArray(new Entity[0]);
+
+                ItemStackWrapper[] inputs = new ItemStackWrapper[nearby.length];
+
+                int i = 0;
+                for (Entity entity : nearby) {
+                    inputs[i++] = new ItemStackWrapper(((Item) entity).getItemStack());
+                }
+
+                AlchemyRecipe recipe = getRecipes().get(new AlchemyInput(inputs));
+
+                if (recipe != null) {
+                    consumeRecipe(inputs, nearby, recipe);
+                    return new AlchemyProcess(recipe);
+                }
+
+                return null;
+            });
         });
+    }
+
+    private static void consumeRecipe(ItemStackWrapper[] inputs, @Nonnull Entity[] entities, @Nonnull AlchemyRecipe recipe) {
+        for (Map.Entry<String, Integer> entry : recipe.getEntries()) {
+
+            int rem = entry.getValue();
+
+            for (int i = 0 ; i < inputs.length ; i++) {
+
+                ItemStackWrapper consume = inputs[i];
+
+                if (entry.getKey().equals(StackUtils.getIDorType(consume))) {
+                    int amt = consume.getAmount();
+
+                    if (amt > rem) {
+                        ((Item) entities[i]).getItemStack().setAmount(amt - rem);
+                        break;
+                    }
+
+                    entities[i].remove();
+
+                    if ((rem -= amt) == 0) {
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /**

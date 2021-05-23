@@ -50,7 +50,7 @@ public final class AlchemyCauldron extends AbstractAlchemyCrafter {
 
     @Override
     protected double getItemRadius() {
-        return 0.5;
+        return 1;
     }
 
     @Nonnull

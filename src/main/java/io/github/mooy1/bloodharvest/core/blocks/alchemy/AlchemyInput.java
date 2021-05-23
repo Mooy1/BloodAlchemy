@@ -2,6 +2,9 @@ package io.github.mooy1.bloodharvest.core.blocks.alchemy;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Nonnull;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -27,6 +30,11 @@ public class AlchemyInput {
         this.hash = hash;
     }
 
+    @Nonnull
+    public Set<Map.Entry<String, Integer>> getEntries() {
+        return this.map.entrySet();
+    }
+
     @Override
     public int hashCode() {
         return this.hash;
@@ -37,7 +45,7 @@ public class AlchemyInput {
         if (!(obj instanceof AlchemyInput)) {
             return false;
         }
-        for (Map.Entry<String, Integer> entry : ((AlchemyInput) obj).map.entrySet()) {
+        for (Map.Entry<String, Integer> entry : ((AlchemyInput) obj).getEntries()) {
             if (this.map.getOrDefault(entry.getKey(), 0) < entry.getValue()) {
                 return false;
             }
