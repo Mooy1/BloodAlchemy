@@ -15,6 +15,7 @@ import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -29,7 +30,6 @@ public final class Tools {
     public static final SlimefunItemStack TEST_POTION = AlchemyCauldron.createPotion(
             Color.RED,
             "&4Test",
-            "&7testing",
             new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1),
             new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1)
     );
@@ -60,8 +60,10 @@ public final class Tools {
 
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
 
-        new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-
+        new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+                null, SlimefunItems.SILVER_INGOT, SlimefunItems.SILVER_INGOT,
+                null, SlimefunItems.SILVER_INGOT, null,
+                null, new ItemStack(Material.STICK), null
         }).register(plugin);
 
         new VampireBlade(category, VAMPIRE_BLADE, BloodAltar.TYPE, new ItemStack[] {

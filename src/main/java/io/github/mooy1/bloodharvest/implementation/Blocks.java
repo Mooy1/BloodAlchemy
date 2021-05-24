@@ -35,13 +35,6 @@ public final class Blocks {
             "&7Used to create and infuse items with blood, right click to activate"
     );
 
-    public static final SlimefunItemStack INFUSED_BLOOD_ALTAR = new SlimefunItemStack(
-            "INFUSED_BLOOD_ALTAR",
-            Material.ENCHANTING_TABLE,
-            "&cInfused Blood Altar",
-            "&7Used to automatically create and infuse items with blood"
-    );
-
     public static final SlimefunItemStack BLOOD_HOPPER = new SlimefunItemStack(
             "BLOOD_HOPPER",
             Material.HOPPER,
@@ -77,6 +70,9 @@ public final class Blocks {
         new AlchemyCauldron(category, ALCHEMY_CAULDRON, BloodAltar.TYPE, new ItemStack[] {
 
         }).register(plugin);
+
+
+
     }
 
 }

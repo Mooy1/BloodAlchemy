@@ -1,8 +1,6 @@
 package io.github.mooy1.bloodharvest.implementation.blocks;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -75,17 +73,12 @@ public final class AlchemyCauldron extends AbstractAlchemyAltar {
      * Creates a potion to be crafted in this
      */
     @Nonnull
-    public static SlimefunItemStack createPotion(Color color, String name, String description, PotionEffect... effects) {
+    public static SlimefunItemStack createPotion(Color color, String name, PotionEffect... effects) {
         return new SlimefunItemStack(
                 ChatColor.stripColor(ChatColors.color(name)).toUpperCase(Locale.ROOT) + "_POTION",
                 Material.POTION,
                 name + " Potion",
                 meta -> {
-                    List<String> lore = new ArrayList<>();
-                    lore.add("");
-                    lore.add(description);
-                    meta.setLore(lore);
-
                     PotionMeta potion = (PotionMeta) meta;
                     potion.setColor(color);
                     for (PotionEffect effect : effects) {

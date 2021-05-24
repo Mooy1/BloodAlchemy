@@ -33,18 +33,18 @@ public final class Items {
             "&7Contains the power of blood"
     );
 
-    public static final SlimefunItemStack GROWTH_ESSENCE = new SlimefunItemStack(
-            "GROWTH_ESSENCE",
-            Material.LIME_DYE,
-            "&aGrowth Essence",
-            "&7Contains the power of growth"
-    );
-
     public static final SlimefunItemStack HARVEST_ESSENCE = new SlimefunItemStack(
             "HARVEST_ESSENCE",
             Material.YELLOW_DYE,
             "&eHarvest Essence",
             "&7Contains the power of harvest"
+    );
+
+    public static final SlimefunItemStack GROWTH_ESSENCE = new SlimefunItemStack(
+            "GROWTH_ESSENCE",
+            Material.LIME_DYE,
+            "&aGrowth Essence",
+            "&7Contains the power of growth"
     );
 
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
