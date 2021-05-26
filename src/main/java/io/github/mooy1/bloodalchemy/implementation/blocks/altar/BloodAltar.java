@@ -1,7 +1,7 @@
-package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.altar;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 import javax.annotation.Nonnull;
 
@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.Blocks;
 import io.github.mooy1.infinitylib.items.StackUtils;
 import io.github.mooy1.infinitylib.players.CoolDownMap;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
@@ -24,11 +26,23 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 /**
  * An abstract item which crafts from items dropped in the world
  */
-public abstract class AbstractAlchemyAltar extends SlimefunItem {
+public final class BloodAltar extends SlimefunItem {
+
+    private static final Map<AltarInput, AltarRecipe> RECIPES = new HashMap<>();
+
+    public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("blood_altar"),
+            Blocks.BLOOD_ALTAR, (itemStacks, itemStack) -> {
+        AltarRecipe recipe = new AltarRecipe(itemStacks, itemStack);
+        /*
+         * The recipe acts as a way to match inputs as well
+         * as storing the outputs so we map it to itself.
+         */
+        RECIPES.put(recipe, recipe);
+    });
 
     private final CoolDownMap coolDowns = new CoolDownMap();
 
-    public AbstractAlchemyAltar(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public BloodAltar(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
         addItemHandler(getUseHandler());
@@ -53,8 +67,7 @@ public abstract class AbstractAlchemyAltar extends SlimefunItem {
      * Finds a recipe from items on the ground and starts the process
      */
     private void findRecipe(@Nonnull Location l, @Nonnull Player p) {
-        double radius = getItemRadius();
-        Entity[] nearby = p.getWorld().getNearbyEntities(l, radius, radius, radius,
+        Entity[] nearby = p.getWorld().getNearbyEntities(l, 2, 2, 2,
                 en -> en instanceof Item).toArray(new Entity[0]);
 
         ItemStackWrapper[] inputs = new ItemStackWrapper[nearby.length];
@@ -64,59 +77,39 @@ public abstract class AbstractAlchemyAltar extends SlimefunItem {
             inputs[i++] = new ItemStackWrapper(((Item) entity).getItemStack());
         }
 
-        AlchemyRecipe recipe = getRecipes().get(new AlchemyInput(inputs));
+        AltarRecipe recipe = RECIPES.get(new AltarInput(inputs));
 
         if (recipe != null) {
             consumeRecipe(inputs, nearby, recipe);
-            onCraftStart(l);
-            new AlchemyProcess(this, recipe, l);
+            new AltarProcess(this, recipe, l);
         }
     }
 
     /**
-     * @return The recipes that are populated by the {@link RecipeType}
+     * Called when an {@link AltarProcess} starts
      */
-    @Nonnull
-    protected abstract Map<AlchemyInput, AlchemyRecipe> getRecipes();
+    void onCraftStart(@Nonnull Location l) {
 
-    /**
-     * @return The radius to check for items in
-     */
-    protected abstract double getItemRadius();
-
-    /**
-     * Called when a crafting process starts
-     */
-    protected abstract void onCraftStart(Location l);
-
-    /**
-     * Called when a crafting process ticks
-     */
-    protected abstract void onCraftProcess(Location l);
-
-    /**
-     * Called when a crafting process finishes
-     */
-    protected abstract void onCraftFinish(Location l);
-
-    /**
-     * @return A callback for sub class's {@link RecipeType}
-     */
-    protected static BiConsumer<ItemStack[], ItemStack> createRecipeCallback(Map<AlchemyInput, AlchemyRecipe> recipes) {
-        return (itemStacks, itemStack) -> {
-            AlchemyRecipe recipe = new AlchemyRecipe(itemStacks, itemStack);
-            /*
-             * The recipe acts as a way to match inputs as well
-             * as storing the outputs so we map it to itself.
-             */
-            recipes.put(recipe, recipe);
-        };
     }
 
     /**
-     * Consumes an {@link AlchemyRecipe} from an array of {@link Item}s
+     * Called when an {@link AltarProcess} processes
      */
-    private static void consumeRecipe(ItemStackWrapper[] inputs, @Nonnull Entity[] items, @Nonnull AlchemyRecipe recipe) {
+    void onCraftProcess(@Nonnull Location l) {
+
+    }
+
+    /**
+     * Called when an {@link AltarProcess} finishes
+     */
+    void onCraftFinish(@Nonnull Location l) {
+
+    }
+
+    /**
+     * Consumes an {@link AltarRecipe} from an array of {@link Item}s
+     */
+    private static void consumeRecipe(ItemStackWrapper[] inputs, @Nonnull Entity[] items, @Nonnull AltarRecipe recipe) {
         for (Map.Entry<String, Integer> entry : recipe.getEntries()) {
 
             int rem = entry.getValue();

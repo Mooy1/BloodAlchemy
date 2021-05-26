@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.altar;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,14 +11,14 @@ import org.bukkit.inventory.ItemStack;
 import io.github.mooy1.infinitylib.items.StackUtils;
 
 /**
- * An input to an {@link AbstractAlchemyAltar} to be used as a key in a recipe map for quick lookup
+ * An input to an {@link BloodAltar} to be used as a key in a recipe map for quick lookup
  */
-public class AlchemyInput {
+public class AltarInput {
 
     private final Map<String, Integer> map = new HashMap<>(8);
     private final int hash;
 
-    AlchemyInput(ItemStack[] recipe) {
+    AltarInput(ItemStack[] recipe) {
         int hash = 0;
         for (ItemStack item : recipe) {
             if (item != null) {
@@ -42,10 +42,10 @@ public class AlchemyInput {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AlchemyInput)) {
+        if (!(obj instanceof AltarInput)) {
             return false;
         }
-        for (Map.Entry<String, Integer> entry : ((AlchemyInput) obj).getEntries()) {
+        for (Map.Entry<String, Integer> entry : ((AltarInput) obj).getEntries()) {
             if (this.map.getOrDefault(entry.getKey(), 0) < entry.getValue()) {
                 return false;
             }

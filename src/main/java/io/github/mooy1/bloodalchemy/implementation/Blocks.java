@@ -7,9 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
-import io.github.mooy1.bloodalchemy.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodalchemy.implementation.blocks.BloodHopper;
-import io.github.mooy1.infinitylib.presets.LorePreset;
+import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -20,18 +19,12 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 @UtilityClass
 public final class Blocks {
 
-    public static final SlimefunItemStack ALCHEMY_CAULDRON = new SlimefunItemStack(
-            "ALCHEMY_CAULDRON",
-            Material.CAULDRON,
-            "&5Alchemy Cauldron",
-            "&7Used to combine herbs and essence into powerful potions"
-    );
-
     public static final SlimefunItemStack BLOOD_ALTAR = new SlimefunItemStack(
             "BLOOD_ALTAR",
             Material.ENCHANTING_TABLE,
             "&cBlood Altar",
-            "&7Used to create and infuse items with blood, right click to activate"
+            "&7Used to create and infuse items with blood",
+            "&7Right-Click to activate"
     );
 
     public static final SlimefunItemStack BLOOD_HOPPER = new SlimefunItemStack(
@@ -40,7 +33,7 @@ public final class Blocks {
             "&cBlood Hopper",
             "&7Collects blood from dying creatures above",
             "",
-            LorePreset.speed(1)
+            "&cChance: 10%"
     );
 
     public static final SlimefunItemStack INFUSED_BLOOD_HOPPER = new SlimefunItemStack(
@@ -49,7 +42,7 @@ public final class Blocks {
             "&cBlood Hopper",
             "&7Collects blood from dying creatures above",
             "",
-            LorePreset.speed(8)
+            "&cChance: 80%"
     );
 
     public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
@@ -60,17 +53,11 @@ public final class Blocks {
 
         new BloodHopper(category, BLOOD_HOPPER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 
-        }, 1).register(plugin);
+        }, 10).register(plugin);
 
         new BloodHopper(category, INFUSED_BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
 
-        }, 8).register(plugin);
-
-        new AlchemyCauldron(category, ALCHEMY_CAULDRON, BloodAltar.TYPE, new ItemStack[] {
-
-        }).register(plugin);
-
-
+        }, 80).register(plugin);
 
     }
 

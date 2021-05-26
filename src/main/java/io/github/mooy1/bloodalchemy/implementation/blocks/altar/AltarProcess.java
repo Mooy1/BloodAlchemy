@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.altar;
 
 import javax.annotation.Nonnull;
 
@@ -10,18 +10,18 @@ import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 /**
- * An {@link AlchemyRecipe} being processed in an {@link AbstractAlchemyAltar}
+ * An {@link AltarRecipe} being processed in an {@link BloodAltar}
  */
-final class AlchemyProcess implements Runnable {
+final class AltarProcess implements Runnable {
 
     private static final int INTERVAL = 12;
 
-    private final AbstractAlchemyAltar altar;
-    private final AlchemyRecipe recipe;
+    private final BloodAltar altar;
+    private final AltarRecipe recipe;
     private final Location location;
     private int ticks;
 
-    AlchemyProcess(@Nonnull AbstractAlchemyAltar altar, @Nonnull AlchemyRecipe recipe, @Nonnull Location location) {
+    AltarProcess(@Nonnull BloodAltar altar, @Nonnull AltarRecipe recipe, @Nonnull Location location) {
         this.altar = altar;
         this.recipe = recipe;
         this.location = location;

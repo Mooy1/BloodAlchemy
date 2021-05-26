@@ -42,7 +42,7 @@ public final class BloodAlchemy extends AbstractAddon {
 
     @Override
     protected Metrics setupMetrics() {
-        return new Metrics(this, 11453);
+        return new Metrics(this, 11483);
     }
 
     @Nonnull

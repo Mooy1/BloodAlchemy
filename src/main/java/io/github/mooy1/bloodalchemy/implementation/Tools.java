@@ -11,7 +11,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
-import io.github.mooy1.bloodalchemy.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodalchemy.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodalchemy.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodalchemy.implementation.tools.VampireBlade;
