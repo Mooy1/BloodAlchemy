@@ -16,7 +16,7 @@ public final class AlchemyRecipe extends AlchemyInput {
     private final List<ItemStack> inputs = new ArrayList<>();
     private final ItemStack output;
 
-    public AlchemyRecipe(ItemStack[] recipe, ItemStack output) {
+    AlchemyRecipe(ItemStack[] recipe, ItemStack output) {
         super(recipe);
         for (ItemStack item : recipe) {
             if (item != null) {
@@ -24,6 +24,10 @@ public final class AlchemyRecipe extends AlchemyInput {
             }
         }
         this.output = output;
+    }
+
+    int size() {
+        return this.inputs.size();
     }
 
 }

@@ -25,7 +25,7 @@ public final class Blocks {
             "ALCHEMY_CAULDRON",
             Material.CAULDRON,
             "&5Alchemy Cauldron",
-            "&7Used to combine blood and essence into powerful potions"
+            "&7Used to combine herbs and essence into powerful potions"
     );
 
     public static final SlimefunItemStack BLOOD_ALTAR = new SlimefunItemStack(

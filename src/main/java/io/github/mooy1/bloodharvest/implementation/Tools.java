@@ -15,6 +15,7 @@ import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
 import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;
+import io.github.mooy1.bloodharvest.utils.BloodUtils;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -42,20 +43,22 @@ public final class Tools {
             "&7Right-Click to collect blood from yourself"
     );
 
-    // TODO infused blood, blood, on death heal
     public static final SlimefunItemStack BLOOD_TOTEM = new SlimefunItemStack(
             "BLOOD_TOTEM",
             Material.TOTEM_OF_UNDYING,
             "&4Blood Totem",
-            "&7Becomes more powerful as you feed it blood"
+            "&7Becomes more powerful as you feed it blood",
+            "",
+            BloodUtils.getStoredLore(0)
     );
 
-    // TODO infused blood, blood, right click to dash
     public static final SlimefunItemStack VAMPIRE_BLADE = new SlimefunItemStack(
             "VAMPIRE_BLADE",
             Material.NETHERITE_SWORD,
             "&4Vampire Blade",
             "&7Becomes more powerful as you feed it blood"
+            "",
+            BloodUtils.getStoredLore(0)
     );
 
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {

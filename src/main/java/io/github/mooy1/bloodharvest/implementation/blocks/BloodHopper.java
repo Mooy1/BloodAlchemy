@@ -31,7 +31,9 @@ public final class BloodHopper extends SlimefunItem implements Listener {
 
     public BloodHopper(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int speed) {
         super(category, item, recipeType, recipe);
+
         this.speed = speed;
+
         BloodHarvest.inst().registerListener(this);
     }
 

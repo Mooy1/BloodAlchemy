@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.mooy1.infinitylib.items.StackUtils;
 
 /**
- * An input to an {@link AbstractAlchemyAltar} to be used as a key in a map
+ * An input to an {@link AbstractAlchemyAltar} to be used as a key in a recipe map for quick lookup
  */
 public class AlchemyInput {
 

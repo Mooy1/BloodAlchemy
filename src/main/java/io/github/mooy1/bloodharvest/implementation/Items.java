@@ -21,51 +21,39 @@ public final class Items {
 
     public static final SlimefunItemStack BLOOD = new SlimefunItemStack(
             "BLOOD",
-            Material.RED_DYE,
-            "&cBlood",
-            "&7Gleaming with untapped power"
+            Material.REDSTONE,
+            "&4Blood",
+            "&7Gleaming with power"
     );
 
-    public static final SlimefunItemStack BLOOD_ESSENCE = new SlimefunItemStack(
-            "BLOOD_ESSENCE",
+    public static final SlimefunItemStack ESSENCE_OF_BLOOD = new SlimefunItemStack(
+            "ESSENCE_OF_BLOOD",
             Material.RED_DYE,
-            "&cBlood Essence",
-            "&7Contains the power of blood"
+            "&cEssence of Blood",
+            "&7Contains the pure power of blood"
     );
 
-    public static final SlimefunItemStack HARVEST_ESSENCE = new SlimefunItemStack(
-            "HARVEST_ESSENCE",
+    public static final SlimefunItemStack ESSENCE_OF_HARVEST = new SlimefunItemStack(
+            "ESSENCE_OF_HARVEST",
             Material.YELLOW_DYE,
-            "&eHarvest Essence",
-            "&7Contains the power of harvest"
+            "&eEssence of Harvest",
+            "&7Contains the pure power of harvest"
     );
 
-    public static final SlimefunItemStack GROWTH_ESSENCE = new SlimefunItemStack(
-            "GROWTH_ESSENCE",
+    public static final SlimefunItemStack ESSENCE_OF_GROWTH = new SlimefunItemStack(
+            "ESSENCE_OF_GROWTH",
             Material.LIME_DYE,
-            "&aGrowth Essence",
-            "&7Contains the power of growth"
+            "&aEssence of Growth",
+            "&7Contains the pure power of growth"
     );
 
     public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
-
         new SlimefunItem(category, BLOOD, SacrificialDagger.TYPE, new ItemStack[] {
                 new CustomItem(Material.ZOMBIE_HEAD, "&cKill any mob"),
                 null, null, null, null, null, null, null, null
         }).register(plugin);
-        /*
-        new SlimefunItem(category, BLOOD_ESSENCE, , new ItemStack[] {
-                null, null, null, null, null, null, null, null, null
-        }).register(plugin);
 
-        new SlimefunItem(category, GROWTH_ESSENCE, , new ItemStack[] {
-                null, null, null, null, null, null, null, null, null
-        }).register(plugin);
 
-        new SlimefunItem(category, HARVEST_ESSENCE, , new ItemStack[] {
-                null, null, null, null, null, null, null, null, null
-        }).register(plugin);
-        */
     }
 
 }

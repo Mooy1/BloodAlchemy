@@ -45,11 +45,6 @@ public final class AlchemyCauldron extends AbstractAlchemyAltar {
     }
 
     @Override
-    protected int getTicksPerCraft() {
-        return 10;
-    }
-
-    @Override
     protected double getItemRadius() {
         return 1;
     }
