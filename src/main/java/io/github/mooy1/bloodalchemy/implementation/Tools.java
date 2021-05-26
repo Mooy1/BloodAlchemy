@@ -1,5 +1,7 @@
 package io.github.mooy1.bloodalchemy.implementation;
 
+import java.util.Arrays;
+
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
@@ -11,6 +13,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
 import io.github.mooy1.bloodalchemy.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodalchemy.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodalchemy.implementation.tools.VampireBlade;
@@ -72,13 +75,15 @@ public final class Tools {
                 null, new ItemStack(Material.STICK), null
         }).register(plugin);
 
-        new VampireBlade(category, VAMPIRE_BLADE, BloodAltar.TYPE, new ItemStack[] {
+        new VampireBlade(category, VAMPIRE_BLADE, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
 
-        }).register(plugin);
+        }, 9)).register(plugin);
 
-        new BloodTotem(category, BLOOD_TOTEM, BloodAltar.TYPE, new ItemStack[] {
-
-        }).register(plugin);
+        new BloodTotem(category, BLOOD_TOTEM, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
+                new ItemStack(Material.TOTEM_OF_UNDYING),
+                new SlimefunItemStack(Items.BLOOD_GEM, 8),
+                new SlimefunItemStack(Items.BLOOD, 64)
+        }, 9)).register(plugin);
 
     }
 

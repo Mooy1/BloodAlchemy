@@ -38,7 +38,7 @@ public final class SacrificialDagger extends SlimefunItem {
             Player p = e.getPlayer();
             Location l = p.getLocation();
 
-            p.setHealth(Math.min(0, p.getHealth() - 4));
+            p.setHealth(Math.max(0, p.getHealth() - 4));
             p.getWorld().dropItemNaturally(l, Items.BLOOD.clone());
 
             BloodUtils.spawnParticles(l, 20, 2);

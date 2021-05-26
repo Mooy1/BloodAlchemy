@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -15,7 +16,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
-import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
 
 /**
  * Utility methods for blood related things
@@ -41,7 +41,7 @@ public final class BloodUtils {
     /**
      * The start of the line of lore that shows stored blood
      */
-    private static final String STORED_LORE_START = ChatColors.color("&4Blood: &c");
+    private static final String STORED_LORE_START = ChatColor.DARK_RED + "Blood: " + ChatColor.RED;
 
     /**
      * Creates blood particles at the specified location with the specified amount
@@ -61,7 +61,7 @@ public final class BloodUtils {
      * Creates a line of lore which shows how much blood is stored out of the max
      */
     public static String getStoredLore(int stored) {
-        return STORED_LORE_START + stored + " &4/&c 100";
+        return STORED_LORE_START + stored + ChatColor.RED + " / " + ChatColor.DARK_RED + MAX_STORED;
     }
 
     /**

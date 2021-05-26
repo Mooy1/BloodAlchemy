@@ -1,5 +1,7 @@
 package io.github.mooy1.bloodalchemy.implementation;
 
+import java.util.Arrays;
+
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
@@ -8,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.bloodalchemy.implementation.blocks.BloodHopper;
+import io.github.mooy1.bloodalchemy.implementation.blocks.GoldenSeeds;
+import io.github.mooy1.bloodalchemy.implementation.blocks.GoldenWheat;
 import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -18,6 +22,20 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 @UtilityClass
 public final class Blocks {
+
+    public static final SlimefunItemStack GOLDEN_SEEDS = new SlimefunItemStack(
+            "GOLDEN_SEEDS",
+            Material.WHEAT_SEEDS,
+            "&eGolden Seeds",
+            "&eAlchemically imbued with gold"
+    );
+
+    public static final SlimefunItemStack GOLDEN_WHEAT = new SlimefunItemStack(
+            "GOLDEN_WHEAT",
+            Material.WHEAT,
+            "&eGolden Wheat",
+            "&7Infused with the power of gold"
+    );
 
     public static final SlimefunItemStack BLOOD_ALTAR = new SlimefunItemStack(
             "BLOOD_ALTAR",
@@ -47,17 +65,29 @@ public final class Blocks {
 
     public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
 
-        new BloodAltar(category, BLOOD_ALTAR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-
+    new BloodAltar(category, BLOOD_ALTAR, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
+            null, Items.BLOOD, null,
+            Items.BLOOD, new ItemStack(Material.ENCHANTING_TABLE), Items.BLOOD,
+            null, Items.BLOOD, null
         }).register(plugin);
 
-        new BloodHopper(category, BLOOD_HOPPER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+        new BloodHopper(category, BLOOD_HOPPER, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
+            new ItemStack(Material.HOPPER), new SlimefunItemStack(Items.BLOOD, 16)
+        }, 9), 10).register(plugin);
 
-        }, 10).register(plugin);
+        new BloodHopper(category, INFUSED_BLOOD_HOPPER, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
+            BLOOD_HOPPER, new SlimefunItemStack(Items.BLOOD_GEM, 4)
+        }, 9), 80).register(plugin);
 
-        new BloodHopper(category, INFUSED_BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
+        new GoldenSeeds(category, GOLDEN_SEEDS, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
+                new ItemStack(Material.WHEAT_SEEDS, 16),
+                new SlimefunItemStack(Items.BLOOD, 16),
+                new ItemStack(Material.GOLD_INGOT, 16)
+        }, 9), GOLDEN_WHEAT).register(plugin);
 
-        }, 80).register(plugin);
+        new GoldenWheat(category, GOLDEN_WHEAT, GoldenSeeds.TYPE, Arrays.copyOf(new ItemStack[] {
+                GOLDEN_SEEDS
+        }, 9), GOLDEN_SEEDS).register(plugin);
 
     }
 
