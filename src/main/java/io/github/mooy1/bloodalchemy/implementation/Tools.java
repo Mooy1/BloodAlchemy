@@ -5,12 +5,8 @@ import java.util.Arrays;
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
@@ -28,18 +24,6 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 @UtilityClass
 public final class Tools {
-
-    public static final SlimefunItemStack TEST_POTION = new SlimefunItemStack(
-            "TEST_POTION",
-            Material.POTION,
-            "&4Test Potion",
-            meta -> {
-                PotionMeta potion = (PotionMeta) meta;
-                potion.setColor(Color.RED);
-                potion.addCustomEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1), true);
-                potion.addCustomEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1), true);
-            }
-    );
 
     public static final SlimefunItemStack SACRIFICIAL_DAGGER = new SlimefunItemStack(
             "SACRIFICIAL_DAGGER",
@@ -69,7 +53,7 @@ public final class Tools {
 
     public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
 
-        new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+        new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
                 null, SlimefunItems.SILVER_INGOT, SlimefunItems.SILVER_INGOT,
                 null, SlimefunItems.SILVER_INGOT, null,
                 null, new ItemStack(Material.STICK), null

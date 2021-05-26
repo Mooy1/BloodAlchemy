@@ -18,15 +18,17 @@ public class AltarInput {
     private final Map<String, Integer> map = new HashMap<>(8);
     private final int hash;
 
-    AltarInput(ItemStack[] recipe) {
+    AltarInput(@Nonnull ItemStack[] input) {
         int hash = 0;
-        for (ItemStack item : recipe) {
+
+        for (ItemStack item : input) {
             if (item != null) {
                 String id = StackUtils.getIDorType(item);
                 hash += id.hashCode();
                 this.map.compute(id, (k, v) -> v == null ? item.getAmount() : v + item.getAmount());
             }
         }
+
         this.hash = hash;
     }
 

@@ -10,8 +10,8 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.bloodalchemy.implementation.blocks.BloodHopper;
-import io.github.mooy1.bloodalchemy.implementation.blocks.GoldenSeeds;
-import io.github.mooy1.bloodalchemy.implementation.blocks.GoldenWheat;
+import io.github.mooy1.bloodalchemy.implementation.blocks.SlimefunSeed;
+import io.github.mooy1.bloodalchemy.implementation.blocks.SlimefunCrop;
 import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -27,7 +27,7 @@ public final class Blocks {
             "GOLDEN_SEEDS",
             Material.WHEAT_SEEDS,
             "&eGolden Seeds",
-            "&eAlchemically imbued with gold"
+            "&7Alchemically imbued with gold"
     );
 
     public static final SlimefunItemStack GOLDEN_WHEAT = new SlimefunItemStack(
@@ -79,13 +79,13 @@ public final class Blocks {
             BLOOD_HOPPER, new SlimefunItemStack(Items.BLOOD_GEM, 4)
         }, 9), 80).register(plugin);
 
-        new GoldenSeeds(category, GOLDEN_SEEDS, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
+        new SlimefunSeed(category, GOLDEN_SEEDS, BloodAltar.TYPE, Arrays.copyOf(new ItemStack[] {
                 new ItemStack(Material.WHEAT_SEEDS, 16),
                 new SlimefunItemStack(Items.BLOOD, 16),
                 new ItemStack(Material.GOLD_INGOT, 16)
         }, 9), GOLDEN_WHEAT).register(plugin);
 
-        new GoldenWheat(category, GOLDEN_WHEAT, GoldenSeeds.TYPE, Arrays.copyOf(new ItemStack[] {
+        new SlimefunCrop(category, GOLDEN_WHEAT, SlimefunSeed.TYPE, Arrays.copyOf(new ItemStack[] {
                 GOLDEN_SEEDS
         }, 9), GOLDEN_SEEDS).register(plugin);
 

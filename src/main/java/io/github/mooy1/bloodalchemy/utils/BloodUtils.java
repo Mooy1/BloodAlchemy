@@ -61,7 +61,7 @@ public final class BloodUtils {
      * Creates a line of lore which shows how much blood is stored out of the max
      */
     public static String getStoredLore(int stored) {
-        return STORED_LORE_START + stored + ChatColor.RED + " / " + ChatColor.DARK_RED + MAX_STORED;
+        return STORED_LORE_START + stored + ChatColor.DARK_RED + " / " + ChatColor.RED + MAX_STORED;
     }
 
     /**
