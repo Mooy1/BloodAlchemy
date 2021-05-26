@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
 
 import java.util.ArrayList;
 import java.util.List;

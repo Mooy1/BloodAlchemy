@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
 
 import javax.annotation.Nonnull;
 
@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 /**
@@ -27,7 +27,7 @@ final class AlchemyProcess implements Runnable {
         this.location = location;
 
         altar.onCraftStart(this.location);
-        BloodHarvest.inst().runSync(this, INTERVAL);
+        BloodAlchemy.inst().runSync(this, INTERVAL);
     }
 
     @Override
@@ -47,7 +47,7 @@ final class AlchemyProcess implements Runnable {
         } else {
             // Process
             this.altar.onCraftProcess(this.location);
-            BloodHarvest.inst().runSync(this, INTERVAL);
+            BloodAlchemy.inst().runSync(this, INTERVAL);
         }
     }
 

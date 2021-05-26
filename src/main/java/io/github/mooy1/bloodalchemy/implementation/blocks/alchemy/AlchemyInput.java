@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import io.github.mooy1.infinitylib.items.StackUtils;
  */
 public class AlchemyInput {
 
-    private final Map<String, Integer> map = new HashMap<>();
+    private final Map<String, Integer> map = new HashMap<>(8);
     private final int hash;
 
     AlchemyInput(ItemStack[] recipe) {

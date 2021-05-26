@@ -1,22 +1,22 @@
-package io.github.mooy1.bloodharvest;
+package io.github.mooy1.bloodalchemy;
 
 import javax.annotation.Nonnull;
 
 import org.bukkit.Material;
 
-import io.github.mooy1.bloodharvest.implementation.Blocks;
-import io.github.mooy1.bloodharvest.implementation.Items;
-import io.github.mooy1.bloodharvest.implementation.Tools;
+import io.github.mooy1.bloodalchemy.implementation.Blocks;
+import io.github.mooy1.bloodalchemy.implementation.Items;
+import io.github.mooy1.bloodalchemy.implementation.Tools;
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
-public final class BloodHarvest extends AbstractAddon {
+public final class BloodAlchemy extends AbstractAddon {
     
-    private static BloodHarvest instance;
+    private static BloodAlchemy instance;
     
-    public static BloodHarvest inst() {
+    public static BloodAlchemy inst() {
         return instance;
     }
     
@@ -27,8 +27,8 @@ public final class BloodHarvest extends AbstractAddon {
         // All of the config and auto update stuff is taken care of in AbstractAddon#onEnable
         super.onEnable();
 
-        Category category = new Category(getKey("blood_harvest"),
-                new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Harvest"));
+        Category category = new Category(getKey("blood_alchemy"),
+                new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Alchemy"));
 
         Blocks.setup(this, category);
         Tools.setup(this, category);
@@ -48,7 +48,7 @@ public final class BloodHarvest extends AbstractAddon {
     @Nonnull
     @Override
     protected String getGithubPath() {
-        return "Mooy1/BloodHarvest/master";
+        return "Mooy1/BloodAlchemy/master";
     }
     
 }

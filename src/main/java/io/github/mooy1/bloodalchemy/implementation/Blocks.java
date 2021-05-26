@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation;
+package io.github.mooy1.bloodalchemy.implementation;
 
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
@@ -6,10 +6,9 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
-import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
-import io.github.mooy1.bloodharvest.implementation.blocks.BloodHopper;
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.blocks.BloodAltar;
+import io.github.mooy1.bloodalchemy.implementation.blocks.BloodHopper;
 import io.github.mooy1.infinitylib.presets.LorePreset;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -53,7 +52,7 @@ public final class Blocks {
             LorePreset.speed(8)
     );
 
-    public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
+    public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
 
         new BloodAltar(category, BLOOD_ALTAR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
 

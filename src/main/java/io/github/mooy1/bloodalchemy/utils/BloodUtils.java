@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.utils;
+package io.github.mooy1.bloodalchemy.utils;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import io.github.mooy1.bloodharvest.BloodHarvest;
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
 
 /**
@@ -31,7 +31,7 @@ public final class BloodUtils {
     /**
      * The NamespacedKey for storing blood on an item in persistent data
      */
-    private static final NamespacedKey STORED_KEY = BloodHarvest.inst().getKey("stored_blood");
+    private static final NamespacedKey STORED_KEY = BloodAlchemy.inst().getKey("stored_blood");
 
     /**
      * An instance of Redstone block data for creating blood particles

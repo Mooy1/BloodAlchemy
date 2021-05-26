@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation;
+package io.github.mooy1.bloodalchemy.implementation;
 
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
@@ -6,20 +6,19 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.blocks.AlchemyCauldron;
-import io.github.mooy1.bloodharvest.implementation.blocks.BloodAltar;
-import io.github.mooy1.bloodharvest.implementation.tools.BloodTotem;
-import io.github.mooy1.bloodharvest.implementation.tools.SacrificialDagger;
-import io.github.mooy1.bloodharvest.implementation.tools.VampireBlade;
-import io.github.mooy1.bloodharvest.utils.BloodUtils;
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.blocks.BloodAltar;
+import io.github.mooy1.bloodalchemy.implementation.tools.BloodTotem;
+import io.github.mooy1.bloodalchemy.implementation.tools.SacrificialDagger;
+import io.github.mooy1.bloodalchemy.implementation.tools.VampireBlade;
+import io.github.mooy1.bloodalchemy.utils.BloodUtils;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
@@ -28,11 +27,16 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 @UtilityClass
 public final class Tools {
 
-    public static final SlimefunItemStack TEST_POTION = AlchemyCauldron.createPotion(
-            Color.RED,
-            "&4Test",
-            new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1),
-            new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1)
+    public static final SlimefunItemStack TEST_POTION = new SlimefunItemStack(
+            "TEST_POTION",
+            Material.POTION,
+            "&4Test Potion",
+            meta -> {
+                PotionMeta potion = (PotionMeta) meta;
+                potion.setColor(Color.RED);
+                potion.addCustomEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1), true);
+                potion.addCustomEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1), true);
+            }
     );
 
     public static final SlimefunItemStack SACRIFICIAL_DAGGER = new SlimefunItemStack(
@@ -56,12 +60,12 @@ public final class Tools {
             "VAMPIRE_BLADE",
             Material.NETHERITE_SWORD,
             "&4Vampire Blade",
-            "&7Becomes more powerful as you feed it blood"
+            "&7Becomes more powerful as you feed it blood",
             "",
             BloodUtils.getStoredLore(0)
     );
 
-    public static void setup(@Nonnull BloodHarvest plugin, @Nonnull Category category) {
+    public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
 
         new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
                 null, SlimefunItems.SILVER_INGOT, SlimefunItems.SILVER_INGOT,
@@ -74,10 +78,6 @@ public final class Tools {
         }).register(plugin);
 
         new BloodTotem(category, BLOOD_TOTEM, BloodAltar.TYPE, new ItemStack[] {
-
-        }).register(plugin);
-
-        new SlimefunItem(category, TEST_POTION, AlchemyCauldron.TYPE, new ItemStack[] {
 
         }).register(plugin);
 

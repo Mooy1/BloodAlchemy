@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks;
+package io.github.mooy1.bloodalchemy.implementation.blocks;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,11 +8,11 @@ import javax.annotation.Nonnull;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.Blocks;
-import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AbstractAlchemyAltar;
-import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyInput;
-import io.github.mooy1.bloodharvest.implementation.blocks.alchemy.AlchemyRecipe;
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.Blocks;
+import io.github.mooy1.bloodalchemy.implementation.blocks.alchemy.AbstractAlchemyAltar;
+import io.github.mooy1.bloodalchemy.implementation.blocks.alchemy.AlchemyInput;
+import io.github.mooy1.bloodalchemy.implementation.blocks.alchemy.AlchemyRecipe;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -24,7 +24,7 @@ public final class BloodAltar extends AbstractAlchemyAltar {
 
     static final Map<AlchemyInput, AlchemyRecipe> RECIPES = new HashMap<>();
 
-    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("blood_altar"),
+    public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("blood_altar"),
             Blocks.BLOOD_ALTAR, createRecipeCallback(RECIPES));
 
 

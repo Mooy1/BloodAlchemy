@@ -1,12 +1,12 @@
-package io.github.mooy1.bloodharvest.implementation.tools;
+package io.github.mooy1.bloodalchemy.implementation.tools;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import io.github.mooy1.bloodharvest.implementation.Items;
-import io.github.mooy1.bloodharvest.utils.BloodUtils;
+import io.github.mooy1.bloodalchemy.implementation.Items;
+import io.github.mooy1.bloodalchemy.utils.BloodUtils;
 import io.github.thebusybiscuit.slimefun4.core.handlers.EntityKillHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;

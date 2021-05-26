@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.tools;
+package io.github.mooy1.bloodalchemy.implementation.tools;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.bloodharvest.BloodHarvest;
-import io.github.mooy1.bloodharvest.implementation.Items;
-import io.github.mooy1.bloodharvest.implementation.Tools;
-import io.github.mooy1.bloodharvest.utils.BloodUtils;
+import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.Items;
+import io.github.mooy1.bloodalchemy.implementation.Tools;
+import io.github.mooy1.bloodalchemy.utils.BloodUtils;
 import io.github.thebusybiscuit.slimefun4.core.handlers.EntityKillHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -20,7 +20,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public final class SacrificialDagger extends SlimefunItem {
 
-    public static final RecipeType TYPE = new RecipeType(BloodHarvest.inst().getKey("sacrificial_dagger"), Tools.SACRIFICIAL_DAGGER);
+    public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("sacrificial_dagger"), Tools.SACRIFICIAL_DAGGER);
 
     public SacrificialDagger(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);

@@ -1,4 +1,4 @@
-package io.github.mooy1.bloodharvest.implementation.blocks.alchemy;
+package io.github.mooy1.bloodalchemy.implementation.blocks.alchemy;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -106,9 +106,8 @@ public abstract class AbstractAlchemyAltar extends SlimefunItem {
         return (itemStacks, itemStack) -> {
             AlchemyRecipe recipe = new AlchemyRecipe(itemStacks, itemStack);
             /*
-             * We map the recipe to itself so that we can do fast lookup
-             * via an input that isn't completely equal to the recipe
-             * as well as access the original recipe via the output
+             * The recipe acts as a way to match inputs as well
+             * as storing the outputs so we map it to itself.
              */
             recipes.put(recipe, recipe);
         };
