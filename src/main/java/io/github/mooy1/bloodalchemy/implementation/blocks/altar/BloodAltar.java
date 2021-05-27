@@ -13,9 +13,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.bloodalchemy.implementation.Blocks;
-import io.github.mooy1.infinitylib.items.CachedItemStack;
+import io.github.mooy1.infinitylib.items.StackUtils;
 import io.github.mooy1.infinitylib.players.CoolDownMap;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -67,22 +69,39 @@ public final class BloodAltar extends SlimefunItem {
      * Finds a recipe from items on the ground and starts the process
      */
     private void findRecipe(@Nonnull Location l, @Nonnull Player p) {
-        Entity[] nearby = p.getWorld().getNearbyEntities(l, 2, 2, 2,
-                e -> e instanceof Item).toArray(new Entity[0]);
 
-        CachedItemStack[] arr = new CachedItemStack[nearby.length];
+        Multimap<String, ItemStack> inputs = HashMultimap.create();
 
-        for (int i = 0 ; i < arr.length ; i++) {
-            arr[i] = new CachedItemStack(((Item) nearby[i]).getItemStack());
+        for (Entity e : p.getWorld().getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item)) {
+            ItemStack item = ((Item) e).getItemStack();
+            inputs.put(StackUtils.getIDorType(item), item);
         }
 
-        AltarRecipe recipe = RECIPES.get(new AltarInput(arr));
+        AltarRecipe recipe = RECIPES.get(new AltarInput(inputs));
 
-        if (recipe != null) {
-            consumeRecipe(arr, nearby, recipe);
-            new AltarProcess(this, recipe, l);
-        } else {
+        if (recipe == null) {
             p.sendMessage(ChatColor.RED + "Invalid Recipe!");
+            return;
+        }
+
+        new AltarProcess(this, recipe, l);
+
+        // Consume the inputs
+        for (Map.Entry<String, Integer> entry : recipe.getEntries()) {
+
+            int rem = entry.getValue();
+
+            for (ItemStack input : inputs.get(entry.getKey())) {
+
+                int amt = input.getAmount();
+
+                if (amt >= rem) {
+                    input.setAmount(amt - rem);
+                    break;
+                }
+
+                rem -= amt;
+            }
         }
     }
 
@@ -105,37 +124,6 @@ public final class BloodAltar extends SlimefunItem {
      */
     void onCraftFinish(@Nonnull Location l) {
         // TODO implement
-    }
-
-    /**
-     * Consumes an {@link AltarRecipe} from an array of {@link Item}s
-     */
-    private static void consumeRecipe(CachedItemStack[] inputs, @Nonnull Entity[] items, @Nonnull AltarRecipe recipe) {
-        for (Map.Entry<String, Integer> entry : recipe.getEntries()) {
-
-            int rem = entry.getValue();
-
-            for (int i = 0 ; i < inputs.length ; i++) {
-
-                CachedItemStack input = inputs[i];
-
-                if (entry.getKey().equals(input.getIDorType())) {
-
-                    int amt = input.getAmount();
-
-                    if (amt > rem) {
-                        input.setAmount(amt - rem);
-                        break;
-                    }
-
-                    items[i].remove();
-
-                    if ((rem -= amt) == 0) {
-                        break;
-                    }
-                }
-            }
-        }
     }
 
 }

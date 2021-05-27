@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
  * A recipe in the {@link BloodAltar} with an output
  */
 @Getter
-public final class AltarRecipe extends AltarInput {
+final class AltarRecipe extends AltarInput {
 
     private final List<ItemStack> inputs = new ArrayList<>();
     private final ItemStack output;
