@@ -11,11 +11,14 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.implementation.Items;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
  * Utility methods for blood related things
@@ -44,17 +47,21 @@ public final class BloodUtils {
     private static final String STORED_LORE_START = ChatColor.DARK_RED + "Blood: " + ChatColor.RED;
 
     /**
-     * Creates blood particles at the specified location with the specified amount
+     * Creates blood sounds and particles at the specified location
      */
-    public static void spawnParticles(@Nonnull Location l, int count, int radius) {
-        l.getWorld().spawnParticle(Particle.BLOCK_CRACK, l, count, radius, radius, radius, PARTICLE_BLOCK_DATA);
+    public static void playEffect(@Nonnull Location l, int particles) {
+        World w = l.getWorld();
+        if (w != null) {
+            w.playSound(l, Sound.ENTITY_MAGMA_CUBE_SQUISH, 3, 1);
+            w.spawnParticle(Particle.BLOCK_CRACK, l, particles, 2, 2, 2, PARTICLE_BLOCK_DATA);
+        }
     }
 
     /**
-     * Plays a blood noise for the player
+     * Drops the given amount of blood at the given location
      */
-    public static void playSound(@Nonnull Location l) {
-        l.getWorld().playSound(l, Sound.ENTITY_MAGMA_CUBE_SQUISH, 3, 1);
+    public static void dropBlood(@Nonnull Location l, int blood) {
+        l.getWorld().dropItemNaturally(l, new SlimefunItemStack(Items.BLOOD, blood));
     }
 
     /**

@@ -21,11 +21,11 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
-public final class SlimefunCrop extends SlimefunItem implements Listener {
+public final class GoldenWheat extends SlimefunItem implements Listener {
 
     private final SlimefunItemStack seed;
 
-    public SlimefunCrop(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, SlimefunItemStack seed) {
+    public GoldenWheat(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, SlimefunItemStack seed) {
         super(category, item, recipeType, recipe);
         this.seed = seed;
 
@@ -50,7 +50,7 @@ public final class SlimefunCrop extends SlimefunItem implements Listener {
                     if (ageable.getAge() == ageable.getMaximumAge()) {
                         drops.add(getItem().clone());
                     } else {
-                        drops.add(SlimefunCrop.this.seed.clone());
+                        drops.add(GoldenWheat.this.seed.clone());
                     }
                 }
             }

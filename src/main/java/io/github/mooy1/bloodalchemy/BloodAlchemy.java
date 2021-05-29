@@ -4,9 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.bukkit.Material;
 
-import io.github.mooy1.bloodalchemy.implementation.Blocks;
 import io.github.mooy1.bloodalchemy.implementation.Items;
-import io.github.mooy1.bloodalchemy.implementation.Tools;
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -30,9 +28,8 @@ public final class BloodAlchemy extends AbstractAddon {
         Category category = new Category(getKey("blood_alchemy"),
                 new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Alchemy"));
 
-        Blocks.setup(this, category);
-        Tools.setup(this, category);
         Items.setup(this, category);
+
     }
 
     @Override

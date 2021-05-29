@@ -43,8 +43,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
                 if (blood < BloodUtils.MAX_STORED) {
                     Location l = e.getEntity().getLocation();
 
-                    BloodUtils.spawnParticles(l, 20, 2);
-                    BloodUtils.playSound(l);
+                    BloodUtils.playEffect(l, 20);
                     BloodUtils.setStored(totemMeta, Math.min(BloodUtils.MAX_STORED, blood + 20));
 
                     totem.setItemMeta(totemMeta);
@@ -64,8 +63,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
                 if (blood < BloodUtils.MAX_STORED) {
                     Location l = e.getEntity().getLocation();
 
-                    BloodUtils.spawnParticles(l, 20, 2);
-                    BloodUtils.playSound(l);
+                    BloodUtils.playEffect(l, 20);
                     BloodUtils.setStored(totemMeta, Math.min(BloodUtils.MAX_STORED, blood + 4));
 
                     totem.setItemMeta(totemMeta);
@@ -84,14 +82,13 @@ public final class BloodTotem extends SlimefunItem implements Listener {
                 if (BloodUtils.getStored(totemMeta) < BloodUtils.MAX_STORED) {
                     // Don't revive
                     Location l = p.getLocation();
-                    BloodUtils.spawnParticles(l, 100, 2);
-                    BloodUtils.playSound(l);
+                    BloodUtils.playEffect(l, 100);
 
                     e.setCancelled(true);
                 } else {
                     // Revive an reset blood
                     BloodUtils.setStored(totemMeta, 0);
-                    BloodUtils.spawnParticles(p.getLocation(), 100, 2);
+                    BloodUtils.playEffect(p.getLocation(), 100);
 
                     // Update the meta
                     totem.setItemMeta(totemMeta);
@@ -110,7 +107,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
         if (totem.hasItemMeta()) {
             ItemMeta totemMeta = totem.getItemMeta();
 
-            // Make sure it his a totem
+            // Make sure its a totem
             if (getId().equals(StackUtils.getID(totemMeta))) {
                 consumer.accept(totem, totemMeta);
             }

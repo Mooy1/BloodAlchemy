@@ -1,24 +1,25 @@
 package io.github.mooy1.bloodalchemy.implementation.blocks.altar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
-import io.github.mooy1.bloodalchemy.implementation.Blocks;
-import io.github.mooy1.infinitylib.items.StackUtils;
+import io.github.mooy1.bloodalchemy.implementation.Items;
+import io.github.mooy1.bloodalchemy.utils.BloodUtils;
 import io.github.mooy1.infinitylib.players.CoolDownMap;
+import io.github.mooy1.infinitylib.recipes.RecipeMap;
+import io.github.mooy1.infinitylib.recipes.RecipeOutput;
+import io.github.mooy1.infinitylib.recipes.ShapelessRecipe;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -30,17 +31,9 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 public final class BloodAltar extends SlimefunItem {
 
-    private static final Map<AltarInput, AltarRecipe> RECIPES = new HashMap<>();
+    private static final RecipeMap<ItemStack> RECIPES = new RecipeMap<>(ShapelessRecipe::new);
 
-    public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("blood_altar"),
-            Blocks.BLOOD_ALTAR, (itemStacks, itemStack) -> {
-        AltarRecipe recipe = new AltarRecipe(itemStacks, itemStack);
-        /*
-         * The recipe acts as a way to match inputs as well
-         * as storing the outputs so we map it to itself.
-         */
-        RECIPES.put(recipe, recipe);
-    });
+    public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("blood_altar"), Items.BLOOD_ALTAR, RECIPES::put);
 
     private final CoolDownMap coolDowns = new CoolDownMap();
 
@@ -70,60 +63,48 @@ public final class BloodAltar extends SlimefunItem {
      */
     private void findRecipe(@Nonnull Location l, @Nonnull Player p) {
 
-        Multimap<String, ItemStack> inputs = HashMultimap.create();
+        Collection<Entity> items = p.getWorld().getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item);
 
-        for (Entity e : p.getWorld().getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item)) {
-            ItemStack item = ((Item) e).getItemStack();
-            inputs.put(StackUtils.getIDorType(item), item);
+        ItemStack[] input = new ItemStack[items.size()];
+
+        int i = 0;
+        for (Entity e : items) {
+            input[i++] = ((Item) e).getItemStack();
         }
 
-        AltarRecipe recipe = RECIPES.get(new AltarInput(inputs));
+        RecipeOutput<ItemStack> output = RECIPES.get(input);
 
-        if (recipe == null) {
+        if (output == null) {
             p.sendMessage(ChatColor.RED + "Invalid Recipe!");
             return;
         }
 
-        new AltarProcess(this, recipe, l);
+        output.consumeInput();
 
-        // Consume the inputs
-        for (Map.Entry<String, Integer> entry : recipe.getEntries()) {
+        onCraftStart(l);
 
-            int rem = entry.getValue();
-
-            for (ItemStack input : inputs.get(entry.getKey())) {
-
-                int amt = input.getAmount();
-
-                if (amt >= rem) {
-                    input.setAmount(amt - rem);
-                    break;
-                }
-
-                rem -= amt;
-            }
-        }
+        BloodAlchemy.inst().runSync(new AltarProcess(this, output, l));
     }
 
     /**
      * Called when an {@link AltarProcess} starts
      */
     void onCraftStart(@Nonnull Location l) {
-        // TODO implement
+        l.getWorld().spawnParticle(Particle.PORTAL, l, 50);
     }
 
     /**
      * Called when an {@link AltarProcess} processes
      */
     void onCraftProcess(@Nonnull Location l) {
-        // TODO implement
+        BloodUtils.playEffect(l, 10);
     }
 
     /**
      * Called when an {@link AltarProcess} finishes
      */
     void onCraftFinish(@Nonnull Location l) {
-        // TODO implement
+        l.getWorld().spawnParticle(Particle.REVERSE_PORTAL, l, 50);
     }
 
 }
