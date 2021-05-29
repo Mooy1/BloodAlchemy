@@ -39,6 +39,21 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 @UtilityClass
 public final class Items {
 
+    //region Items
+    public static final SlimefunItemStack BLOOD_GEM = new SlimefunItemStack(
+            "BLOOD_GEM",
+            Material.RED_DYE,
+            "&cBlood Gem",
+            "&7A Diamond infused with the power of blood"
+    );
+    public static final SlimefunItemStack BLOOD = new SlimefunItemStack(
+            "BLOOD",
+            Material.REDSTONE,
+            "&4Blood",
+            "&7Gleaming with power"
+    );
+    //endregion
+
     //region Tools
     public static final SlimefunItemStack SACRIFICIAL_DAGGER = new SlimefunItemStack(
             "SACRIFICIAL_DAGGER",
@@ -191,21 +206,6 @@ public final class Items {
     );
     //endregion
 
-    //region Items
-    public static final SlimefunItemStack BLOOD_GEM = new SlimefunItemStack(
-            "BLOOD_GEM",
-            Material.RED_DYE,
-            "&cBlood Gem",
-            "&7A Diamond infused with the power of blood"
-    );
-    public static final SlimefunItemStack BLOOD = new SlimefunItemStack(
-            "BLOOD",
-            Material.REDSTONE,
-            "&4Blood",
-            "&7Gleaming with power"
-    );
-    //endregion
-
     public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
 
         new BloodAltar(category, BLOOD_ALTAR, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
@@ -302,9 +302,10 @@ public final class Items {
 
         new SlimefunItem(category, VAMPIRIC_STRENGTH_POTION, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.GLASS_BOTTLE),
-                new ItemStack(Material.BLAZE_ROD, 16),
+                new SlimefunItemStack(BLOOD_SHROOM, 8),
+                new ItemStack(Material.BLAZE_ROD, 8),
                 new ItemStack(Material.NETHERITE_SCRAP, 1),
-                new SlimefunItemStack(BLOOD, 64),
+                new SlimefunItemStack(BLOOD, 32),
         });
 
         new SlimefunItem(category, VAMPIRIC_SPEED_POTION, BloodAltar.TYPE, new ItemStack[] {

@@ -65,6 +65,11 @@ public final class BloodAltar extends SlimefunItem {
 
         Collection<Entity> items = p.getWorld().getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item);
 
+        if (items.size() == 0) {
+            p.sendMessage(ChatColor.RED + "Drop items near the alter!");
+            return;
+        }
+
         ItemStack[] input = new ItemStack[items.size()];
 
         int i = 0;
