@@ -47,7 +47,7 @@ public final class BloodHopper extends SlimefunItem implements Listener {
             // Check the 2 blocks below for collectors
             if (BlockStorage.check(b = b.getRelative(BlockFace.DOWN), getId())
                     || BlockStorage.check(b = b.getRelative(BlockFace.DOWN), getId())) {
-                addBlood(b.getRelative(BlockFace.DOWN));
+                addBlood(b);
             }
         }
     }

@@ -13,6 +13,7 @@ It is centered around performing alchemy using blood on the blood altar.
 - Infused Vampire Blade - Heals you when you attack and allows you to teleport short distances
 - Blood Totem - Totem of undying which doesn't get consumed, but must be filled with blood to activate
 - Blood Wolf Rune - Rune which gives wolves the ability to heal themselves when attacking
+- Harvest Scythe - Harvests and replants crops in a 5x5 area
 - Blood Apple - An alternate way to craft enchanted golden apples with blood
 - Golden Potion - Powerful potion with multiple affects made with golden wheat
 - Death Potion - Powerful splash potion with multiple deadly effects

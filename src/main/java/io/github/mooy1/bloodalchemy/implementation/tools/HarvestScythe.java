@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
@@ -40,7 +41,7 @@ public final class HarvestScythe extends SlimefunItem implements NotPlaceable {
 
             switch (b.getType()) {
                 case SUGAR_CANE:
-                    breakTopCrops(e.getPlayer(), e.getItem(), b, Material.SUGAR_CANE);
+                    breakTopCrops(e.getPlayer(), e.getItem(), b, b.getType());
                 case PUMPKIN:
                 case PUMPKIN_STEM:
                     breakCrops(e.getPlayer(), e.getItem(), b, Material.PUMPKIN);
@@ -125,6 +126,8 @@ public final class HarvestScythe extends SlimefunItem implements NotPlaceable {
 
         if (!breakEvent.isCancelled()) {
             ageable.setAge(0);
+
+            target.getWorld().playSound(target.getLocation(), Sound.ITEM_CROP_PLANT, 2, 1);
 
             if (breakEvent.isDropItems()) {
                 for (ItemStack drop : target.getDrops(item, p)) {
