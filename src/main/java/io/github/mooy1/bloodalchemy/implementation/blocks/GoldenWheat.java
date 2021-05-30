@@ -19,6 +19,7 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public final class GoldenWheat extends SlimefunItem implements Listener {
@@ -36,7 +37,9 @@ public final class GoldenWheat extends SlimefunItem implements Listener {
 
     @EventHandler
     private void onAndroidFarm(@Nonnull AndroidFarmEvent e) {
-        e.setDrop(getItem().clone());
+        if (BlockStorage.check(e.getBlock(), getId())) {
+            e.setDrop(getItem().clone());
+        }
     }
 
     private BlockBreakHandler getBreakHandler() {

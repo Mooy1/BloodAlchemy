@@ -24,6 +24,7 @@ import io.github.mooy1.bloodalchemy.implementation.blocks.GrowingShroom;
 import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
 import io.github.mooy1.bloodalchemy.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodalchemy.implementation.tools.BloodWolfRune;
+import io.github.mooy1.bloodalchemy.implementation.tools.HarvestScythe;
 import io.github.mooy1.bloodalchemy.implementation.tools.InfusedVampireBlade;
 import io.github.mooy1.bloodalchemy.implementation.tools.SacrificialDagger;
 import io.github.mooy1.bloodalchemy.utils.BloodUtils;
@@ -62,6 +63,12 @@ public final class Items {
             "&fSacrificial Dagger",
             "&7Collects blood from killing creatures",
             "&7Right-Click to collect blood from yourself"
+    );
+    public static final SlimefunItemStack HARVEST_SCYTHE = new SlimefunItemStack(
+            "HARVEST_SCYTHE",
+            Material.DIAMOND_HOE,
+            "&eHarvest Scythe",
+            "&7Right-Click to Harvest and replants crops in a 5x5 area"
     );
     public static final SlimefunItemStack BLOOD_TOTEM = new SlimefunItemStack(
             "BLOOD_TOTEM",
@@ -276,6 +283,12 @@ public final class Items {
         new GoldenWheat(category, GOLDEN_WHEAT, GoldenSeeds.TYPE, new ItemStack[] {
                 GOLDEN_SEEDS
         }, GOLDEN_SEEDS).register(plugin);
+
+        new HarvestScythe(category, HARVEST_SCYTHE, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(GOLDEN_WHEAT, 32),
+                new ItemStack(Material.DIAMOND_HOE),
+                BLOOD_GEM
+        }).register(plugin);
 
         new SlimefunItem(category, BLOOD_APPLE, BloodAltar.TYPE, new ItemStack[] {
                 new SlimefunItemStack(GOLDEN_WHEAT, 64),
