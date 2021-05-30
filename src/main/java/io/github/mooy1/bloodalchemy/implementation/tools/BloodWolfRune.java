@@ -53,6 +53,10 @@ public final class BloodWolfRune extends SlimefunItem implements Listener, NotPl
 
                 if (!con.has(this.bloodWolf, PersistentDataType.BYTE)) {
                     con.set(this.bloodWolf, PersistentDataType.BYTE, (byte) 1);
+
+                    item.setAmount(item.getAmount() - 1);
+
+                    BloodUtils.playEffect(wolf.getLocation(), 40);
                 }
             }
         };

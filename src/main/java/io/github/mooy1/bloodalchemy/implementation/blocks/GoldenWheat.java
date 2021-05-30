@@ -49,7 +49,6 @@ public final class GoldenWheat extends SlimefunItem implements Listener {
                     Ageable ageable = (Ageable) data;
                     if (ageable.getAge() == ageable.getMaximumAge()) {
                         drops.add(getItem().clone());
-                    } else {
                         drops.add(GoldenWheat.this.seed.clone());
                     }
                 }
@@ -61,7 +60,7 @@ public final class GoldenWheat extends SlimefunItem implements Listener {
     @Nonnull
     @Override
     public Collection<ItemStack> getDrops() {
-        return Collections.emptyList();
+        return Collections.singletonList(GoldenWheat.this.seed.clone());
     }
 
 }

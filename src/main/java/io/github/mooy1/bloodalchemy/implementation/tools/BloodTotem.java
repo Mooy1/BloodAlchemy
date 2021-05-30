@@ -74,18 +74,12 @@ public final class BloodTotem extends SlimefunItem implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     private void onTotem(@Nonnull EntityResurrectEvent e) {
-        if (!(e.getEntity() instanceof Player)) {
+        if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
 
             checkTotem(p, (totem, totemMeta) -> {
 
-                if (BloodUtils.getStored(totemMeta) < BloodUtils.MAX_STORED) {
-                    // Don't revive
-                    Location l = p.getLocation();
-                    BloodUtils.playEffect(l, 100);
-
-                    e.setCancelled(true);
-                } else {
+                if (BloodUtils.getStored(totemMeta) == BloodUtils.MAX_STORED) {
                     // Revive an reset blood
                     BloodUtils.setStored(totemMeta, 0);
                     BloodUtils.playEffect(p.getLocation(), 100);
@@ -95,6 +89,11 @@ public final class BloodTotem extends SlimefunItem implements Listener {
 
                     // Re add the totem after they revive
                     BloodAlchemy.inst().runSync(() -> p.getInventory().setItemInOffHand(totem));
+
+                } else {
+                    // Don't revive
+                    e.setCancelled(true);
+
                 }
             });
         }

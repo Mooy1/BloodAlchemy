@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -86,18 +87,11 @@ public final class BloodAltar extends SlimefunItem {
 
         output.consumeInput();
 
-        onCraftStart(l);
+        // TODO sound
+        p.getWorld().spawnParticle(Particle.PORTAL, l, 50);
 
         BloodAlchemy.inst().runSync(new AltarProcess(this, output, l));
     }
-
-    /**
-     * Called when an {@link AltarProcess} starts
-     */
-    void onCraftStart(@Nonnull Location l) {
-        l.getWorld().spawnParticle(Particle.PORTAL, l, 50);
-    }
-
     /**
      * Called when an {@link AltarProcess} processes
      */
@@ -109,7 +103,11 @@ public final class BloodAltar extends SlimefunItem {
      * Called when an {@link AltarProcess} finishes
      */
     void onCraftFinish(@Nonnull Location l) {
-        l.getWorld().spawnParticle(Particle.REVERSE_PORTAL, l, 50);
+        World w = l.getWorld();
+        if (w != null) {
+            // TODO sound
+            w.spawnParticle(Particle.REVERSE_PORTAL, l, 50);
+        }
     }
 
 }

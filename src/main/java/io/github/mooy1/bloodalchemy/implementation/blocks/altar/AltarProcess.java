@@ -1,6 +1,6 @@
 package io.github.mooy1.bloodalchemy.implementation.blocks.altar;
 
-import javax.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -14,6 +14,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 /**
  * An {@link ShapelessRecipe} being processed in an {@link BloodAltar}
  */
+@RequiredArgsConstructor
 final class AltarProcess implements Runnable {
 
     private static final int INTERVAL = 12;
@@ -21,14 +22,7 @@ final class AltarProcess implements Runnable {
     private final BloodAltar altar;
     private final RecipeOutput<ItemStack> output;
     private final Location location;
-    private int remaining;
-
-    AltarProcess(@Nonnull BloodAltar altar, @Nonnull RecipeOutput<ItemStack> output, @Nonnull Location location) {
-        this.altar = altar;
-        this.output = output;
-        this.location = location;
-        this.remaining = output.getRecipeInput().length * 3;
-    }
+    private int remaining = 12;
 
     @Override
     public void run() {
