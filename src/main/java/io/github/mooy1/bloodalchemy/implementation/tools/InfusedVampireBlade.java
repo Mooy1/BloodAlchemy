@@ -2,6 +2,7 @@ package io.github.mooy1.bloodalchemy.implementation.tools;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -68,6 +69,8 @@ public final class InfusedVampireBlade extends SlimefunItem implements NotPlacea
                 p.teleport(l);
 
                 BloodUtils.playEffect(p.getLocation(), 20);
+            } else {
+                p.sendMessage(ChatColor.RED + "You need at least 20 blood to teleport, " + BloodUtils.getStoredString(blood));
             }
         };
     }

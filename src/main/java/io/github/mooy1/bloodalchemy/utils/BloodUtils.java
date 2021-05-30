@@ -44,7 +44,7 @@ public final class BloodUtils {
     /**
      * The start of the line of lore that shows stored blood
      */
-    private static final String STORED_LORE_START = ChatColor.DARK_RED + "Blood: " + ChatColor.RED;
+    private static final String STORED_STRING_START = ChatColor.DARK_RED + "Blood: " + ChatColor.RED;
 
     /**
      * Creates blood sounds and particles at the specified location
@@ -62,14 +62,17 @@ public final class BloodUtils {
      * Drops the given amount of blood at the given location
      */
     public static void dropBlood(@Nonnull Location l, int blood) {
-        l.getWorld().dropItemNaturally(l, new SlimefunItemStack(Items.BLOOD, blood));
+        World w = l.getWorld();
+        if (w != null) {
+            w.dropItemNaturally(l, new SlimefunItemStack(Items.BLOOD, blood));
+        }
     }
 
     /**
      * Creates a line of lore which shows how much blood is stored out of the max
      */
-    public static String getStoredLore(int stored) {
-        return STORED_LORE_START + stored + ChatColor.DARK_RED + " / " + ChatColor.RED + MAX_STORED;
+    public static String getStoredString(int stored) {
+        return STORED_STRING_START + stored + ChatColor.DARK_RED + " / " + ChatColor.RED + MAX_STORED;
     }
 
     /**
@@ -90,8 +93,8 @@ public final class BloodUtils {
 
             // Find the blood lore line and replace it
             for (int i = 0 ; i < lore.size() ; i++) {
-                if (lore.get(i).startsWith(STORED_LORE_START)) {
-                    lore.set(i, getStoredLore(stored));
+                if (lore.get(i).startsWith(STORED_STRING_START)) {
+                    lore.set(i, getStoredString(stored));
                     meta.setLore(lore);
                     break;
                 }

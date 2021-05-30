@@ -19,21 +19,18 @@ public final class BloodAlchemy extends AbstractAddon {
     }
     
     @Override
-    public void onEnable() {
-        instance = this;
-
+    protected void onAddonEnable() {
         // All of the config and auto update stuff is taken care of in AbstractAddon#onEnable
-        super.onEnable();
+        instance = this;
 
         Category category = new Category(getKey("blood_alchemy"),
                 new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Alchemy"));
 
         Items.setup(this, category);
-
     }
 
     @Override
-    public void onDisable() {
+    protected void onAddonDisable() {
         instance = null;
     }
 

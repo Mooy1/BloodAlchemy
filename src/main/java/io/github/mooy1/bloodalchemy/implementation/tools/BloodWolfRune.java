@@ -4,9 +4,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -49,12 +51,24 @@ public final class BloodWolfRune extends SlimefunItem implements Listener, NotPl
 
             // Make sure it is a normal wolf
             if (wolf instanceof Wolf) {
+                Player p = e.getPlayer();
+
+                if (!((Wolf) wolf).isTamed()) {
+                    p.sendMessage(ChatColor.RED + "You must tame the wolf first!");
+                    return;
+                }
+
                 PersistentDataContainer con = wolf.getPersistentDataContainer();
 
-                if (!con.has(this.bloodWolf, PersistentDataType.BYTE)) {
+                if (con.has(this.bloodWolf, PersistentDataType.BYTE)) {
+                    p.sendMessage(ChatColor.RED + "This wolf is already a blood wolf");
+
+                } else {
                     con.set(this.bloodWolf, PersistentDataType.BYTE, (byte) 1);
 
                     item.setAmount(item.getAmount() - 1);
+
+                    p.sendMessage(ChatColor.GREEN + "Transformed into blood wolf!");
 
                     BloodUtils.playEffect(wolf.getLocation(), 40);
                 }

@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mooy1</groupId>
     <artifactId>BloodAlchemy</artifactId>
-    <version>ALPHA</version>
+    <version>MODIFIED</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>io.github.mooy1</groupId>
             <artifactId>InfinityLib</artifactId>
-            <version>8d0fe70</version>
+            <version>ca92323</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -95,6 +95,16 @@
                             <artifact>*:*</artifact>
                             <excludes>
                                 <exclude>META-INF/*</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>io.github.mooy1:InfinityLib</artifact>
+                            <excludes>
+                                <exclude>**/infinitylib/slimefun/**</exclude>
+                                <exclude>**/infinitylib/categories/**</exclude>
+                                <exclude>**/infinitylib/persistence/**</exclude>
+                                <exclude>**/infinitylib/smallrecipes/**</exclude>
+                                <exclude>**/infinitylib/presets/**</exclude>
                             </excludes>
                         </filter>
                     </filters>

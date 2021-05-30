@@ -10,6 +10,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -77,7 +78,7 @@ public final class Items {
             "&7Gains blood and upon attacking or killing",
             "&7Revives you upon death when filled with blood",
             "",
-            BloodUtils.getStoredLore(0)
+            BloodUtils.getStoredString(0)
     );
     public static final SlimefunItemStack BLOOD_WOLF_RUNE = new SlimefunItemStack(
             "BLOOD_WOLF_RUNE",
@@ -95,16 +96,16 @@ public final class Items {
                         ChatColor.GRAY + "Gains blood and heals you upon attacking or killing",
                         ChatColor.GRAY + "Right-Click to teleport for 20 blood",
                         "",
-                        BloodUtils.getStoredLore(0)
+                        BloodUtils.getStoredString(0)
                 ));
                 meta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
                 meta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
             }
     );
-    public static final SlimefunItemStack BLOOD_APPLE = new SlimefunItemStack(
-            "BLOOD_APPLE",
+    public static final SlimefunItemStack ENCHANTED_BLOOD_APPLE = new SlimefunItemStack(
+            "ENCHANTED_BLOOD_APPLE",
             Material.ENCHANTED_GOLDEN_APPLE,
-            "&cInfused Blood Apple",
+            "&cEnchanted Blood Apple",
             "&7Infused with the power of blood"
     );
     public static final SlimefunItemStack GOLDEN_POTION = new SlimefunItemStack(
@@ -290,9 +291,10 @@ public final class Items {
                 BLOOD_GEM
         }).register(plugin);
 
-        new SlimefunItem(category, BLOOD_APPLE, BloodAltar.TYPE, new ItemStack[] {
-                new SlimefunItemStack(GOLDEN_WHEAT, 64),
-                new ItemStack(Material.APPLE, 64)
+        new SlimefunItem(category, ENCHANTED_BLOOD_APPLE, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(GOLDEN_WHEAT, 32),
+                new ItemStack(Material.APPLE, 32),
+                new SlimefunItemStack(BLOOD, 32)
         }).register(plugin);
 
         new SlimefunItem(category, GOLDEN_POTION, BloodAltar.TYPE, new ItemStack[] {
@@ -305,7 +307,8 @@ public final class Items {
         new GrowingShroom(category, BLOOD_SHROOM, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.RED_MUSHROOM, 32),
                 new SlimefunItemStack(BLOOD, 32)
-        }, new PotionEffect(PotionEffectType.REGENERATION, 400, 0)).register(plugin);
+        }, new PotionEffect(PotionEffectType.REGENERATION, 400, 0),
+                Particle.CRIMSON_SPORE).register(plugin);
 
         new SlimefunItem(category, VAMPIRIC_REGENERATION_POTION, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.GLASS_BOTTLE),
@@ -335,7 +338,8 @@ public final class Items {
                 new ItemStack(Material.BONE, 32),
                 new ItemStack(Material.WITHER_ROSE, 8),
                 new SlimefunItemStack(BLOOD, 32)
-        }, new PotionEffect(PotionEffectType.WITHER, 400, 2)).register(plugin);
+        }, new PotionEffect(PotionEffectType.WITHER, 400, 2),
+                Particle.WARPED_SPORE).register(plugin);
 
         new SlimefunItem(category, DEATH_POTION, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.GLASS_BOTTLE),

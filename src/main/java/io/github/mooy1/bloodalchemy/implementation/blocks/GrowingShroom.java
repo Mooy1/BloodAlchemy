@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -28,12 +29,16 @@ public final class GrowingShroom extends SlimefunItem {
     private final BlockFace[] nearby = new BlockFace[] {
             BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH
     };
-    private final PotionEffect effect;
 
-    public GrowingShroom(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, PotionEffect effect) {
+    private final PotionEffect effect;
+    private final Particle particle;
+
+    public GrowingShroom(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
+                         PotionEffect effect, Particle particle) {
         super(category, item, recipeType, recipe);
 
         this.effect = effect;
+        this.particle = particle;
 
         addItemHandler(getTicker());
     }
@@ -49,14 +54,17 @@ public final class GrowingShroom extends SlimefunItem {
             @Override
             public void tick(Block b, SlimefunItem item, Config data) {
                 if (ThreadLocalRandom.current().nextInt(30) == 0) {
-                    GrowingShroom.this.tick(b);
+                    GrowingShroom.this.growAndApplyEffects(b);
                 }
             }
 
         };
     }
 
-    private void tick(@Nonnull Block b) {
+    private void growAndApplyEffects(@Nonnull Block b) {
+
+        // Do particles
+        b.getWorld().spawnParticle(this.particle, b.getLocation(), 5, .25, .25, .25);
 
         // Grow to nearby
         for (BlockFace face : this.nearby) {

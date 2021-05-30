@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.infinitylib.recipes.RecipeOutput;
 import io.github.mooy1.infinitylib.recipes.ShapelessRecipe;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 /**
@@ -17,26 +18,33 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 @RequiredArgsConstructor
 final class AltarProcess implements Runnable {
 
-    private static final int INTERVAL = 12;
+    private static final int INTERVAL = SlimefunPlugin.getTickerTask().getTickRate();
+    private static final int TICKS = 10;
 
     private final BloodAltar altar;
     private final RecipeOutput<ItemStack> output;
     private final Location location;
-    private int remaining = 12;
+    private int remaining = TICKS;
 
     @Override
     public void run() {
         if (!BlockStorage.check(this.location, this.altar.getId())) {
-            // Cancel
+            // Cancel, drop recipe
             World world = this.location.getWorld();
-            for (ItemStack item : this.output.getRecipeInput()) {
-                world.dropItemNaturally(this.location, item);
+            if (world != null) {
+                for (ItemStack item : this.output.getRecipeInput()) {
+                    world.dropItemNaturally(this.location, item);
+                }
             }
 
         } else if (--this.remaining == 0) {
             // Done
             this.altar.onCraftFinish(this.location);
-            this.location.getWorld().dropItemNaturally(this.location, this.output.getOutput().clone());
+
+            World world = this.location.getWorld();
+            if (world != null) {
+                world.dropItemNaturally(this.location, this.output.getOutput().clone());
+            }
 
         } else {
             // Process

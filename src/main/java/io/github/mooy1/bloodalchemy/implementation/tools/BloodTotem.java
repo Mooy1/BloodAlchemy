@@ -4,6 +4,7 @@ import java.util.function.BiConsumer;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -54,22 +55,29 @@ public final class BloodTotem extends SlimefunItem implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void onHit(@Nonnull EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Player) {
-
-            checkTotem((Player) e.getDamager(), (totem, totemMeta) -> {
-
-                int blood = BloodUtils.getStored(totemMeta);
-
-                if (blood < BloodUtils.MAX_STORED) {
-                    Location l = e.getEntity().getLocation();
-
-                    BloodUtils.playEffect(l, 20);
-                    BloodUtils.setStored(totemMeta, Math.min(BloodUtils.MAX_STORED, blood + 4));
-
-                    totem.setItemMeta(totemMeta);
-                }
-            });
+        if (!(e.getDamager() instanceof Player)) {
+            return;
         }
+
+        Player p = (Player) e.getDamager();
+
+        checkTotem(p, (totem, totemMeta) -> {
+
+            int blood = BloodUtils.getStored(totemMeta);
+
+            if (blood < BloodUtils.MAX_STORED) {
+                Location l = e.getEntity().getLocation();
+
+                if (blood > 95) {
+                    p.sendMessage(ChatColor.GREEN + "Your blood totem is ready!");
+                }
+
+                BloodUtils.playEffect(l, 20);
+                BloodUtils.setStored(totemMeta, Math.min(BloodUtils.MAX_STORED, blood + 4));
+
+                totem.setItemMeta(totemMeta);
+            }
+        });
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
@@ -79,7 +87,9 @@ public final class BloodTotem extends SlimefunItem implements Listener {
 
             checkTotem(p, (totem, totemMeta) -> {
 
-                if (BloodUtils.getStored(totemMeta) == BloodUtils.MAX_STORED) {
+                int blood = BloodUtils.getStored(totemMeta);
+
+                if (blood == BloodUtils.MAX_STORED) {
                     // Revive an reset blood
                     BloodUtils.setStored(totemMeta, 0);
                     BloodUtils.playEffect(p.getLocation(), 100);
@@ -94,6 +104,7 @@ public final class BloodTotem extends SlimefunItem implements Listener {
                     // Don't revive
                     e.setCancelled(true);
 
+                    p.sendMessage(ChatColor.RED + "You need 100 blood to revive, " + BloodUtils.getStoredString(blood));
                 }
             });
         }

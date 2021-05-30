@@ -36,7 +36,7 @@ public final class BloodAltar extends SlimefunItem {
 
     public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("blood_altar"), Items.BLOOD_ALTAR, RECIPES::put);
 
-    private final CoolDownMap coolDowns = new CoolDownMap();
+    private final CoolDownMap coolDowns = new CoolDownMap(200);
 
     public BloodAltar(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
@@ -53,7 +53,7 @@ public final class BloodAltar extends SlimefunItem {
             e.setUseBlock(Event.Result.DENY);
             e.setUseItem(Event.Result.DENY);
 
-            if (this.coolDowns.checkAndReset(e.getPlayer().getUniqueId(), 200)) {
+            if (this.coolDowns.checkAndReset(e.getPlayer().getUniqueId())) {
                 findRecipe(e.getClickedBlock().get().getLocation(), e.getPlayer());
             }
         };
