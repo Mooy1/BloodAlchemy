@@ -19,9 +19,9 @@ import org.bukkit.potion.PotionEffectType;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.bloodalchemy.implementation.blocks.BloodHopper;
-import io.github.mooy1.bloodalchemy.implementation.blocks.GoldenSeeds;
-import io.github.mooy1.bloodalchemy.implementation.blocks.GoldenWheat;
-import io.github.mooy1.bloodalchemy.implementation.blocks.GrowingShroom;
+import io.github.mooy1.bloodalchemy.implementation.blocks.SlimefunSeed;
+import io.github.mooy1.bloodalchemy.implementation.blocks.SlimefunCrop;
+import io.github.mooy1.bloodalchemy.implementation.blocks.SlimefunShroom;
 import io.github.mooy1.bloodalchemy.implementation.blocks.altar.BloodAltar;
 import io.github.mooy1.bloodalchemy.implementation.tools.BloodTotem;
 import io.github.mooy1.bloodalchemy.implementation.tools.BloodWolfRune;
@@ -182,7 +182,7 @@ public final class Items {
             Material.ENCHANTING_TABLE,
             "&cBlood Altar",
             "&7Used to create and infuse items with blood",
-            "&7Right-Click to activate"
+            "&7Drop the recipe's items near the alter and right-click to activate"
     );
     public static final SlimefunItemStack BLOOD_HOPPER = new SlimefunItemStack(
             "BLOOD_HOPPER",
@@ -190,7 +190,7 @@ public final class Items {
             "&cBlood Hopper",
             "&7Collects blood from dying creatures above",
             "",
-            "&cChance: 10%"
+            "&cChance: 15%"
     );
     public static final SlimefunItemStack INFUSED_BLOOD_HOPPER = new SlimefunItemStack(
             "INFUSED_BLOOD_HOPPER",
@@ -198,7 +198,7 @@ public final class Items {
             "&cBlood Hopper",
             "&7Collects blood from dying creatures above",
             "",
-            "&cChance: 80%"
+            "&cChance: 100%"
     );
     public static final SlimefunItemStack GOLDEN_WHEAT = new SlimefunItemStack(
             "GOLDEN_WHEAT",
@@ -210,19 +210,19 @@ public final class Items {
             "BLOOD_SHROOM",
             Material.RED_MUSHROOM,
             "&cBlood Shroom",
-            "&7Gives health to those who come near",
-            "&7Spreads to nearby red mushrooms"
+            "&7Gives health to those who come near"
     );
     public static final SlimefunItemStack DEATH_SHROOM = new SlimefunItemStack(
             "DEATH_SHROOM",
             Material.BROWN_MUSHROOM,
             "&8Death Shroom",
-            "&7Brings death upon those who get too close",
-            "&7Spreads to nearby brown mushrooms"
+            "&7Brings death to those who get too close"
     );
     //endregion
 
-    public static void setup(@Nonnull BloodAlchemy plugin, @Nonnull Category category) {
+    public static void setup(@Nonnull BloodAlchemy plugin) {
+        Category category = new Category(plugin.getKey("blood_alchemy"),
+                new CustomItem(Material.NETHER_WART_BLOCK, "&4Blood Alchemy"));
 
         new SacrificialDagger(category, SACRIFICIAL_DAGGER, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
                 null, SlimefunItems.SILVER_INGOT, SlimefunItems.SILVER_INGOT,
@@ -243,7 +243,7 @@ public final class Items {
         new BloodHopper(category, BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.HOPPER),
                 new SlimefunItemStack(Items.BLOOD, 16)
-        }, 10).register(plugin);
+        }, 15).register(plugin);
 
         new BloodWolfRune(category, BLOOD_WOLF_RUNE, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.BONE, 16),
@@ -259,7 +259,7 @@ public final class Items {
         new BloodHopper(category, INFUSED_BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
                 BLOOD_HOPPER,
                 Items.BLOOD_GEM
-        }, 80).register(plugin);
+        }, 100).register(plugin);
 
         new InfusedVampireBlade(category, INFUSED_VAMPIRE_BLADE, BloodAltar.TYPE, new ItemStack[] {
                 SlimefunItems.BLADE_OF_VAMPIRES,
@@ -275,13 +275,13 @@ public final class Items {
                 new SlimefunItemStack(BLOOD, 64)
         }).register(plugin);
 
-        new GoldenSeeds(category, GOLDEN_SEEDS, BloodAltar.TYPE, new ItemStack[] {
+        new SlimefunSeed(category, GOLDEN_SEEDS, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.WHEAT_SEEDS, 16),
                 new SlimefunItemStack(Items.BLOOD, 16),
                 new ItemStack(Material.GOLD_INGOT, 16)
         }, GOLDEN_WHEAT).register(plugin);
 
-        new GoldenWheat(category, GOLDEN_WHEAT, GoldenSeeds.TYPE, new ItemStack[] {
+        new SlimefunCrop(category, GOLDEN_WHEAT, SlimefunSeed.TYPE, new ItemStack[] {
                 GOLDEN_SEEDS
         }, GOLDEN_SEEDS).register(plugin);
 
@@ -304,7 +304,7 @@ public final class Items {
                 new SlimefunItemStack(BLOOD, 8),
         }).register(plugin);
 
-        new GrowingShroom(category, BLOOD_SHROOM, BloodAltar.TYPE, new ItemStack[] {
+        new SlimefunShroom(category, BLOOD_SHROOM, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.RED_MUSHROOM, 32),
                 new SlimefunItemStack(BLOOD, 32)
         }, new PotionEffect(PotionEffectType.REGENERATION, 400, 0),
@@ -328,12 +328,12 @@ public final class Items {
         new SlimefunItem(category, VAMPIRIC_SPEED_POTION, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.GLASS_BOTTLE),
                 new ItemStack(Material.SUGAR, 16),
-                new ItemStack(Material.GLOWSTONE, 16),
+                new ItemStack(Material.GLOWSTONE_DUST, 16),
                 new SlimefunItemStack(SlimefunItems.MAGIC_SUGAR, 16),
                 new SlimefunItemStack(BLOOD, 8),
         }).register(plugin);
 
-        new GrowingShroom(category, DEATH_SHROOM, BloodAltar.TYPE, new ItemStack[] {
+        new SlimefunShroom(category, DEATH_SHROOM, BloodAltar.TYPE, new ItemStack[] {
                 new ItemStack(Material.BROWN_MUSHROOM, 32),
                 new ItemStack(Material.BONE, 32),
                 new ItemStack(Material.WITHER_ROSE, 8),
@@ -346,7 +346,8 @@ public final class Items {
                 new ItemStack(Material.GUNPOWDER, 8),
                 new ItemStack(Material.SPIDER_EYE, 4),
                 new ItemStack(Material.WITHER_ROSE, 4),
-                new SlimefunItemStack(DEATH_SHROOM, 4)
+                new SlimefunItemStack(DEATH_SHROOM, 4),
+                new SlimefunItemStack(BLOOD, 16)
         }).register(plugin);
     }
 

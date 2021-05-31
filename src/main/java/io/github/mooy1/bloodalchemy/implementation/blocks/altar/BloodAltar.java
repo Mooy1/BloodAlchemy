@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -16,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
 import io.github.mooy1.bloodalchemy.implementation.Items;
-import io.github.mooy1.bloodalchemy.utils.BloodUtils;
 import io.github.mooy1.infinitylib.players.CoolDownMap;
 import io.github.mooy1.infinitylib.recipes.RecipeMap;
 import io.github.mooy1.infinitylib.recipes.RecipeOutput;
@@ -65,49 +63,29 @@ public final class BloodAltar extends SlimefunItem {
     private void findRecipe(@Nonnull Location l, @Nonnull Player p) {
 
         Collection<Entity> items = p.getWorld().getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item);
-
         if (items.size() == 0) {
             p.sendMessage(ChatColor.RED + "Drop items near the alter!");
             return;
         }
 
         ItemStack[] input = new ItemStack[items.size()];
-
         int i = 0;
         for (Entity e : items) {
             input[i++] = ((Item) e).getItemStack();
         }
 
         RecipeOutput<ItemStack> output = RECIPES.get(input);
-
         if (output == null) {
             p.sendMessage(ChatColor.RED + "Invalid Recipe!");
             return;
         }
 
         output.consumeInput();
-
         // TODO sound
         p.getWorld().spawnParticle(Particle.PORTAL, l, 50);
 
+        // Start processing the recipe
         BloodAlchemy.inst().runSync(new AltarProcess(this, output, l));
-    }
-    /**
-     * Called when an {@link AltarProcess} processes
-     */
-    void onCraftProcess(@Nonnull Location l) {
-        BloodUtils.playEffect(l, 10);
-    }
-
-    /**
-     * Called when an {@link AltarProcess} finishes
-     */
-    void onCraftFinish(@Nonnull Location l) {
-        World w = l.getWorld();
-        if (w != null) {
-            // TODO sound
-            w.spawnParticle(Particle.REVERSE_PORTAL, l, 50);
-        }
     }
 
 }

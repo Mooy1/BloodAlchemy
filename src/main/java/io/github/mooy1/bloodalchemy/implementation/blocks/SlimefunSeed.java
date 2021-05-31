@@ -16,14 +16,14 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
-public final class GoldenSeeds extends SlimefunItem {
+public final class SlimefunSeed extends SlimefunItem {
 
     public static final RecipeType TYPE = new RecipeType(BloodAlchemy.inst().getKey("farming"),
             new CustomItem(Material.DIAMOND_HOE, "&eFarming"));
 
     private final SlimefunItemStack crop;
 
-    public GoldenSeeds(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, SlimefunItemStack crop) {
+    public SlimefunSeed(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, SlimefunItemStack crop) {
         super(category, item, recipeType, recipe);
         this.crop = crop;
 
@@ -35,12 +35,12 @@ public final class GoldenSeeds extends SlimefunItem {
 
             @Override
             public void onPlayerPlace(@Nonnull BlockPlaceEvent e) {
-                BlockStorage.store(e.getBlock(), GoldenSeeds.this.crop.getItemId());
+                BlockStorage.store(e.getBlock(), SlimefunSeed.this.crop.getItemId());
             }
 
             @Override
             public void onBlockPlacerPlace(@Nonnull BlockPlacerPlaceEvent e) {
-                BlockStorage.store(e.getBlock(), GoldenSeeds.this.crop.getItemId());
+                BlockStorage.store(e.getBlock(), SlimefunSeed.this.crop.getItemId());
             }
 
         };

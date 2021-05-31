@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -53,6 +54,7 @@ public final class BloodWolfRune extends SlimefunItem implements Listener, NotPl
             if (wolf instanceof Wolf) {
                 Player p = e.getPlayer();
 
+                // Mak sure the wolf is tamed
                 if (!((Wolf) wolf).isTamed()) {
                     p.sendMessage(ChatColor.RED + "You must tame the wolf first!");
                     return;
@@ -64,19 +66,17 @@ public final class BloodWolfRune extends SlimefunItem implements Listener, NotPl
                     p.sendMessage(ChatColor.RED + "This wolf is already a blood wolf");
 
                 } else {
-                    con.set(this.bloodWolf, PersistentDataType.BYTE, (byte) 1);
-
-                    item.setAmount(item.getAmount() - 1);
-
                     p.sendMessage(ChatColor.GREEN + "Transformed into blood wolf!");
 
+                    con.set(this.bloodWolf, PersistentDataType.BYTE, (byte) 1);
+                    item.setAmount(item.getAmount() - 1);
                     BloodUtils.playEffect(wolf.getLocation(), 40);
                 }
             }
         };
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void onBloodWolfAttack(@Nonnull EntityDamageByEntityEvent e) {
 
         // Check for blood wolf
@@ -92,8 +92,7 @@ public final class BloodWolfRune extends SlimefunItem implements Listener, NotPl
             if (ThreadLocalRandom.current().nextBoolean()) {
 
                 // Drop blood
-                BloodUtils.dropBlood(wolf.getLocation(), 1);
-
+                BloodUtils.dropBlood(e.getEntity().getLocation(), 1);
             }
         }
     }

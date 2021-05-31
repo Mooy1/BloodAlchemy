@@ -9,6 +9,7 @@ import javax.annotation.Nonnull;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -22,24 +23,17 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
-public final class GoldenWheat extends SlimefunItem implements Listener {
+public final class SlimefunCrop extends SlimefunItem implements Listener {
 
     private final SlimefunItemStack seed;
 
-    public GoldenWheat(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, SlimefunItemStack seed) {
+    public SlimefunCrop(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, SlimefunItemStack seed) {
         super(category, item, recipeType, recipe);
         this.seed = seed;
 
         addItemHandler(getBreakHandler());
 
         BloodAlchemy.inst().registerListener(this);
-    }
-
-    @EventHandler
-    private void onAndroidFarm(@Nonnull AndroidFarmEvent e) {
-        if (BlockStorage.check(e.getBlock(), getId())) {
-            e.setDrop(getItem().clone());
-        }
     }
 
     private BlockBreakHandler getBreakHandler() {
@@ -51,8 +45,9 @@ public final class GoldenWheat extends SlimefunItem implements Listener {
                 if (data instanceof Ageable) {
                     Ageable ageable = (Ageable) data;
                     if (ageable.getAge() == ageable.getMaximumAge()) {
+                        // Drop a crop and extra seed
                         drops.add(getItem().clone());
-                        drops.add(GoldenWheat.this.seed.clone());
+                        drops.add(SlimefunCrop.this.seed.clone());
                     }
                 }
             }
@@ -63,7 +58,14 @@ public final class GoldenWheat extends SlimefunItem implements Listener {
     @Nonnull
     @Override
     public Collection<ItemStack> getDrops() {
-        return Collections.singletonList(GoldenWheat.this.seed.clone());
+        return Collections.singletonList(SlimefunCrop.this.seed.clone());
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    private void onAndroidFarm(@Nonnull AndroidFarmEvent e) {
+        if (e.getDrop() != null && BlockStorage.check(e.getBlock(), getId())) {
+            e.setDrop(getItem().clone());
+        }
     }
 
 }

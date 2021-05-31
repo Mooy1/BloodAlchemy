@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -42,10 +43,9 @@ public final class SacrificialDagger extends SlimefunItem implements Listener, N
             e.setUseBlock(Event.Result.DENY);
 
             Player p = e.getPlayer();
-            Location l = p.getLocation();
-
             p.setHealth(Math.max(0, p.getHealth() - 4));
 
+            Location l = p.getLocation();
             BloodUtils.dropBlood(l, 1);
             BloodUtils.playEffect(l, 20);
         };
@@ -54,14 +54,13 @@ public final class SacrificialDagger extends SlimefunItem implements Listener, N
     private EntityKillHandler getKillHandler() {
         return (e, entity, killer, item1) -> {
             Location l = entity.getLocation();
-
             BloodUtils.dropBlood(l, 2);
             BloodUtils.playEffect(l, 20);
         };
     }
 
     // Replace with WeaponUseHandler once merged
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void onAttack(@Nonnull EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
             Player p = (Player) e.getDamager();
@@ -69,7 +68,6 @@ public final class SacrificialDagger extends SlimefunItem implements Listener, N
             if (isItem(p.getInventory().getItemInMainHand()) && canUse(p, true)) {
 
                 Location l = e.getEntity().getLocation();
-
                 BloodUtils.dropBlood(l, 1);
                 BloodUtils.playEffect(l, 10);
             }

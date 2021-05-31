@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -38,15 +39,15 @@ public final class InfusedVampireBlade extends SlimefunItem implements NotPlacea
 
     private EntityKillHandler getKillHandler() {
         return (e, entity, killer, item) -> {
-            ItemMeta meta = item.getItemMeta();
 
+            ItemMeta meta = item.getItemMeta();
             int blood = BloodUtils.getStored(meta);
 
             if (blood < BloodUtils.MAX_STORED) {
+                // Store 40 blood
                 BloodUtils.setStored(meta, Math.min(BloodUtils.MAX_STORED, blood + 40));
-                item.setItemMeta(meta);
-
                 BloodUtils.playEffect(killer.getLocation(), 20);
+                item.setItemMeta(meta);
             }
         };
     }
@@ -56,19 +57,24 @@ public final class InfusedVampireBlade extends SlimefunItem implements NotPlacea
             Player p = e.getPlayer();
 
             ItemMeta meta = e.getItem().getItemMeta();
-
             int blood = BloodUtils.getStored(meta);
 
-            // Teleport the player 8 blocks forward
+            // Get the block 8 meters from where the player faces
             Location l = p.getLocation();
             l.add(l.getDirection().multiply(8));
 
-            if (l.getBlock().isEmpty() && blood >= 20) {
+            if (!l.getBlock().isEmpty()) {
+                p.sendMessage(ChatColor.RED + "You cannot teleport into a solid block!");
+                return;
+            }
+
+            if (blood >= 20) {
+                // Take 20 blood and teleport
                 BloodUtils.setStored(meta, blood - 20);
+                BloodUtils.playEffect(p.getLocation(), 20);
                 e.getItem().setItemMeta(meta);
                 p.teleport(l);
 
-                BloodUtils.playEffect(p.getLocation(), 20);
             } else {
                 p.sendMessage(ChatColor.RED + "You need at least 20 blood to teleport, " + BloodUtils.getStoredString(blood));
             }
@@ -76,14 +82,13 @@ public final class InfusedVampireBlade extends SlimefunItem implements NotPlacea
     }
 
     // Replace with WeaponUseHandler once merged
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void onAttack(@Nonnull EntityDamageByEntityEvent e) {
         if (!(e.getDamager() instanceof Player)) {
             return;
         }
 
         Player p = (Player) e.getDamager();
-
         ItemStack item = p.getInventory().getItemInMainHand();
 
         if (!item.hasItemMeta()) {
@@ -97,10 +102,10 @@ public final class InfusedVampireBlade extends SlimefunItem implements NotPlacea
             int blood = BloodUtils.getStored(meta);
 
             if (blood < BloodUtils.MAX_STORED) {
+                // Store 5 blood
                 BloodUtils.setStored(meta, Math.min(BloodUtils.MAX_STORED, blood + 5));
-                item.setItemMeta(meta);
-
                 BloodUtils.playEffect(p.getLocation(), 10);
+                item.setItemMeta(meta);
             }
         }
     }

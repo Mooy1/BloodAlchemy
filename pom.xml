@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mooy1</groupId>
     <artifactId>BloodAlchemy</artifactId>
-    <version>MODIFIED</version>
+    <version>ALPHA</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

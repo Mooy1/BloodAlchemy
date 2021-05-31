@@ -114,7 +114,7 @@ public final class HarvestScythe extends SlimefunItem implements DamageableItem,
                 target.setType(Material.AIR);
             }
 
-            if (ThreadLocalRandom.current().nextInt(8) == 0) {
+            if (ThreadLocalRandom.current().nextBoolean()) {
                 damageItem(p, item);
             }
         }
@@ -147,7 +147,6 @@ public final class HarvestScythe extends SlimefunItem implements DamageableItem,
         String id = BlockStorage.checkID(target);
 
         BlockBreakEvent breakEvent = new BlockBreakEvent(target, p);
-
         Bukkit.getPluginManager().callEvent(breakEvent);
 
         if (!breakEvent.isCancelled()) {
@@ -164,7 +163,7 @@ public final class HarvestScythe extends SlimefunItem implements DamageableItem,
             }
 
             if (id != null) {
-                // If it was a sf item, re add the id
+                // If it was a sf item, re-add the id
                 BlockStorage.store(target, id);
             }
 
@@ -172,7 +171,7 @@ public final class HarvestScythe extends SlimefunItem implements DamageableItem,
             ageable.setAge(0);
             target.setBlockData(ageable);
 
-            if (ThreadLocalRandom.current().nextInt(8) == 0) {
+            if (ThreadLocalRandom.current().nextBoolean()) {
                 damageItem(p, item);
             }
         }

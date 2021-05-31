@@ -52,7 +52,6 @@ public final class BloodUtils {
     public static void playEffect(@Nonnull Location l, int particles) {
         World w = l.getWorld();
         if (w != null) {
-            // TODO better sound
             w.playSound(l, Sound.ENTITY_MAGMA_CUBE_SQUISH, 2, 1);
             w.spawnParticle(Particle.BLOCK_CRACK, l, particles, 1, 1, 1, PARTICLE_BLOCK_DATA);
         }

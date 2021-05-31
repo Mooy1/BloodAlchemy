@@ -3,10 +3,12 @@ package io.github.mooy1.bloodalchemy.implementation.blocks.altar;
 import lombok.RequiredArgsConstructor;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.bloodalchemy.BloodAlchemy;
+import io.github.mooy1.bloodalchemy.utils.BloodUtils;
 import io.github.mooy1.infinitylib.recipes.RecipeOutput;
 import io.github.mooy1.infinitylib.recipes.ShapelessRecipe;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
@@ -37,18 +39,18 @@ final class AltarProcess implements Runnable {
                 }
             }
 
-        } else if (--this.remaining == 0) {
+        } else if (--this.remaining <= 0) {
             // Done
-            this.altar.onCraftFinish(this.location);
-
             World world = this.location.getWorld();
             if (world != null) {
+                // TODO sound
+                world.spawnParticle(Particle.REVERSE_PORTAL, this.location, 50);
                 world.dropItemNaturally(this.location, this.output.getOutput().clone());
             }
 
         } else {
             // Process
-            this.altar.onCraftProcess(this.location);
+            BloodUtils.playEffect(this.location, 10);
             BloodAlchemy.inst().runSync(this, INTERVAL);
         }
     }
