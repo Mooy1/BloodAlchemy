@@ -235,49 +235,50 @@ public final class Items {
         }).register(plugin);
 
         new BloodAltar(category, BLOOD_ALTAR, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
-                null, Items.BLOOD, null,
-                Items.BLOOD, new ItemStack(Material.ENCHANTING_TABLE), Items.BLOOD,
-                null, Items.BLOOD, null
+                null, BLOOD, null,
+                BLOOD, new ItemStack(Material.ENCHANTING_TABLE), BLOOD,
+                null, BLOOD, null
         }).register(plugin);
 
         new BloodHopper(category, BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
-                new ItemStack(Material.HOPPER),
-                new SlimefunItemStack(Items.BLOOD, 16)
+                new SlimefunItemStack(BLOOD, 16),
+                new ItemStack(Material.HOPPER)
         }, 15).register(plugin);
 
         new BloodWolfRune(category, BLOOD_WOLF_RUNE, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 16),
                 new ItemStack(Material.BONE, 16),
-                new ItemStack(Material.BEEF, 16),
-                new SlimefunItemStack(BLOOD, 16)
+                new ItemStack(Material.BEEF, 16)
         }).register(plugin);
 
         new SlimefunItem(category, BLOOD_GEM, BloodAltar.TYPE, new ItemStack[] {
-                new ItemStack(Material.DIAMOND, 64),
-                new SlimefunItemStack(BLOOD, 64)
+                new SlimefunItemStack(BLOOD, 64),
+                new ItemStack(Material.DIAMOND, 64)
         }).register(plugin);
 
         new BloodHopper(category, INFUSED_BLOOD_HOPPER, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 16),
                 BLOOD_HOPPER,
-                Items.BLOOD_GEM
+                BLOOD_GEM
         }, 100).register(plugin);
 
         new InfusedVampireBlade(category, INFUSED_VAMPIRE_BLADE, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 64),
                 SlimefunItems.BLADE_OF_VAMPIRES,
                 new ItemStack(Material.NETHERITE_INGOT, 4),
-                new SlimefunItemStack(BLOOD_GEM, 4),
-                new SlimefunItemStack(BLOOD, 64)
+                new SlimefunItemStack(BLOOD_GEM, 4)
         }).register(plugin);
 
         new BloodTotem(category, BLOOD_TOTEM, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 64),
                 new ItemStack(Material.TOTEM_OF_UNDYING),
                 new SlimefunItemStack(BLOOD_GEM, 4),
-                new SlimefunItemStack(GOLDEN_WHEAT, 32),
-                new SlimefunItemStack(BLOOD, 64)
+                new SlimefunItemStack(GOLDEN_WHEAT, 32)
         }).register(plugin);
 
         new SlimefunSeed(category, GOLDEN_SEEDS, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 16),
                 new ItemStack(Material.WHEAT_SEEDS, 16),
-                new SlimefunItemStack(Items.BLOOD, 16),
                 new ItemStack(Material.GOLD_INGOT, 16)
         }, GOLDEN_WHEAT).register(plugin);
 
@@ -286,68 +287,69 @@ public final class Items {
         }, GOLDEN_SEEDS).register(plugin);
 
         new HarvestScythe(category, HARVEST_SCYTHE, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 16),
                 new SlimefunItemStack(GOLDEN_WHEAT, 32),
                 new ItemStack(Material.DIAMOND_HOE),
                 BLOOD_GEM
         }).register(plugin);
 
         new SlimefunItem(category, ENCHANTED_BLOOD_APPLE, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 32),
                 new SlimefunItemStack(GOLDEN_WHEAT, 32),
-                new ItemStack(Material.APPLE, 32),
-                new SlimefunItemStack(BLOOD, 32)
+                new ItemStack(Material.APPLE, 32)
         }).register(plugin);
 
         new SlimefunItem(category, GOLDEN_POTION, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 8),
                 new ItemStack(Material.HONEY_BOTTLE, 8),
                 new ItemStack(Material.GOLDEN_APPLE, 4),
-                new SlimefunItemStack(GOLDEN_WHEAT, 8),
-                new SlimefunItemStack(BLOOD, 8),
+                new SlimefunItemStack(GOLDEN_WHEAT, 8)
         }).register(plugin);
 
         new SlimefunShroom(category, BLOOD_SHROOM, BloodAltar.TYPE, new ItemStack[] {
-                new ItemStack(Material.RED_MUSHROOM, 32),
-                new SlimefunItemStack(BLOOD, 32)
+                new SlimefunItemStack(BLOOD, 32),
+                new ItemStack(Material.RED_MUSHROOM, 32)
         }, new PotionEffect(PotionEffectType.REGENERATION, 400, 0),
                 Particle.CRIMSON_SPORE).register(plugin);
 
         new SlimefunItem(category, VAMPIRIC_REGENERATION_POTION, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 32),
                 new ItemStack(Material.GLASS_BOTTLE),
                 new SlimefunItemStack(BLOOD_SHROOM, 8),
-                new ItemStack(Material.GHAST_TEAR, 8),
-                new SlimefunItemStack(BLOOD, 32),
+                new ItemStack(Material.GHAST_TEAR, 8)
         }).register(plugin);
 
         new SlimefunItem(category, VAMPIRIC_STRENGTH_POTION, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 32),
                 new ItemStack(Material.GLASS_BOTTLE),
                 new SlimefunItemStack(BLOOD_SHROOM, 8),
                 new ItemStack(Material.BLAZE_ROD, 8),
-                new ItemStack(Material.NETHERITE_SCRAP, 1),
-                new SlimefunItemStack(BLOOD, 32),
+                new ItemStack(Material.NETHERITE_SCRAP, 1)
         }).register(plugin);
 
         new SlimefunItem(category, VAMPIRIC_SPEED_POTION, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 8),
                 new ItemStack(Material.GLASS_BOTTLE),
                 new ItemStack(Material.SUGAR, 16),
                 new ItemStack(Material.GLOWSTONE_DUST, 16),
-                new SlimefunItemStack(SlimefunItems.MAGIC_SUGAR, 16),
-                new SlimefunItemStack(BLOOD, 8),
+                new SlimefunItemStack(SlimefunItems.MAGIC_SUGAR, 16)
         }).register(plugin);
 
         new SlimefunShroom(category, DEATH_SHROOM, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 32),
                 new ItemStack(Material.BROWN_MUSHROOM, 32),
                 new ItemStack(Material.BONE, 32),
-                new ItemStack(Material.WITHER_ROSE, 8),
-                new SlimefunItemStack(BLOOD, 32)
+                new ItemStack(Material.WITHER_ROSE, 8)
         }, new PotionEffect(PotionEffectType.WITHER, 400, 2),
                 Particle.WARPED_SPORE).register(plugin);
 
         new SlimefunItem(category, DEATH_POTION, BloodAltar.TYPE, new ItemStack[] {
+                new SlimefunItemStack(BLOOD, 16),
                 new ItemStack(Material.GLASS_BOTTLE),
                 new ItemStack(Material.GUNPOWDER, 8),
                 new ItemStack(Material.SPIDER_EYE, 4),
                 new ItemStack(Material.WITHER_ROSE, 4),
-                new SlimefunItemStack(DEATH_SHROOM, 4),
-                new SlimefunItemStack(BLOOD, 16)
+                new SlimefunItemStack(DEATH_SHROOM, 4)
         }).register(plugin);
     }
 

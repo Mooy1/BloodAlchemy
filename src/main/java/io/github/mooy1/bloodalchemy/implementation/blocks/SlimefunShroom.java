@@ -77,9 +77,8 @@ public final class SlimefunShroom extends SlimefunItem implements Listener {
     private void onMushroomSpread(@Nonnull BlockSpreadEvent e) {
         // Store this item on spread mushrooms
         if (BlockStorage.check(e.getSource(), getId())) {
-
+            BlockStorage.store(e.getBlock(), getId());
         }
-        System.out.println("SOURCE: " + e.getSource().getType().name() + " ID: " + BlockStorage.checkID(e.getSource()));
     }
     
 }

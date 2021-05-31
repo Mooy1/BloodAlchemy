@@ -8,7 +8,7 @@ version: ${project.version}
 api-version: 1.16
 
 commands:
-  addontemplate:
+  bloodalchemy:
     description: Do /bloodalchemy help for a list of commands
     usage: /bloodalchemy <subcommand>
-    aliases: [bh]
+    aliases: [ba]

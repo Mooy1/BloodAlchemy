@@ -7,6 +7,8 @@ import javax.annotation.Nonnull;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -61,8 +63,9 @@ public final class BloodAltar extends SlimefunItem {
      * Finds a recipe from items on the ground and starts the process
      */
     private void findRecipe(@Nonnull Location l, @Nonnull Player p) {
+        World w = p.getWorld();
 
-        Collection<Entity> items = p.getWorld().getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item);
+        Collection<Entity> items = w.getNearbyEntities(l, 2, 2, 2, e -> e instanceof Item);
         if (items.size() == 0) {
             p.sendMessage(ChatColor.RED + "Drop items near the alter!");
             return;
@@ -81,8 +84,9 @@ public final class BloodAltar extends SlimefunItem {
         }
 
         output.consumeInput();
-        // TODO sound
-        p.getWorld().spawnParticle(Particle.PORTAL, l, 50);
+
+        w.playSound(l, Sound.BLOCK_END_PORTAL_SPAWN, 1, 1);
+        w.spawnParticle(Particle.PORTAL, l, 50);
 
         // Start processing the recipe
         BloodAlchemy.inst().runSync(new AltarProcess(this, output, l));

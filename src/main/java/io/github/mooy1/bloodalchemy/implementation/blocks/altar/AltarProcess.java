@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 
@@ -43,7 +44,7 @@ final class AltarProcess implements Runnable {
             // Done
             World world = this.location.getWorld();
             if (world != null) {
-                // TODO sound
+                world.playSound(this.location, Sound.ITEM_TOTEM_USE, 1, 1);
                 world.spawnParticle(Particle.REVERSE_PORTAL, this.location, 50);
                 world.dropItemNaturally(this.location, this.output.getOutput().clone());
             }
